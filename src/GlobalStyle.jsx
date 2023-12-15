@@ -16,43 +16,57 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 /*----------------------------------------------------------------------------------------------------------------------------*/
 
 @font-face {
-    font-family: "InterVariable";
+    font-family: "Inter";
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
     src: url("InterVariable-v4.woff2") format(woff2) tech(variations);
 }
 
-/* @font-face {
-    font-family: "InterVariable";
+@font-face {
+    font-family: "Inter";
     font-style: italic;
     font-weight: 100 900;
     font-display: swap;
-    src: url("InterVariable-Italic-v4.woff2") format(woff2) tech(variations);
-} */
+    src: url("InterVariableItalic-v4.woff2") format(woff2) tech(variations);
+}
 
 /* html {
     scroll-behavior: smooth;
 } */
 
 body {
-    font-family: "InterVariable", system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
     font-feature-settings: "cv05" 1, "cv06" 1, "cv11" 1, "cv12" 1, "cv13" 1;
-    /* line-height: 1.5;
+    /* font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
    -moz-osx-font-smoothing: grayscale;
    -webkit-font-smoothing: antialiased; */
 }
 
-/* img {
+#root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: [full-width-start] 1fr [content-start] min(calc(1250rem / 16), 100%) [content-end] 1fr [full-width-end];
+    row-gap: 1rem;
+    min-block-size: 100svb;
+    padding-inline: 1rem;
+
+    & > * {
+        grid-column: content;
+    }
+}
+
+img {
     display: block;
     max-inline-size: 100%;
     block-size: auto;
-} */
 
-/* img[alt] {
-    font-style: italic;
-} */
+    &[alt] {
+        font-style: italic;
+        font-weight: 200;
+    }
+}
 
 /* a {
     color: inherit;
@@ -63,11 +77,11 @@ body {
     list-style-type: none;
 } */
 
-.wrapper {
+/* .wrapper {
     max-inline-size: calc(1366rem / 16);
     inline-size: 90%;
     margin-inline: auto;
-}
+} */
 `;
 
 export default GlobalStyle;
