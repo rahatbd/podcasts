@@ -38,6 +38,8 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 body {
     font-family: "Inter", system-ui, sans-serif;
     font-feature-settings: "cv05" 1, "cv06" 1, "cv11" 1, "cv12" 1, "cv13" 1;
+    background-color: ${({ theme }) => theme.darkTheme.backgroundColour};
+    color: ${({ theme }) => theme.darkTheme.colour};
     /* font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
    -moz-osx-font-smoothing: grayscale;
@@ -45,12 +47,12 @@ body {
 }
 
 #root {
+    /* --_gap: 1rem; */
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: [full-width-start] 1fr [content-start] min(calc(1250rem / 16), 100%) [content-end] 1fr [full-width-end];
-    row-gap: 1rem;
+    grid-template-columns: [full-width-start] 1fr [content-start] min(calc(1250rem / 16), calc(100% - 2rem)) [content-end] 1fr [full-width-end];
+    gap: 1rem;
     min-block-size: 100svb;
-    padding-inline: 1rem;
 
     & > * {
         grid-column: content;
@@ -58,7 +60,8 @@ body {
 }
 
 img {
-    display: block;
+    /* vertical-align: middle; */
+    /* display: block; */
     max-inline-size: 100%;
     block-size: auto;
 

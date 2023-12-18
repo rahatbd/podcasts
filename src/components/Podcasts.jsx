@@ -14,7 +14,7 @@ const StyledContainer = styled.div`
 
 const StyledCard = styled.article`
     line-height: 1.5;
-    border: 1px solid #ffbd14;
+    border: 1px solid ${({ theme }) => theme.darkTheme.borderColour};
     padding: 1rem;
 
     & > *:not(p) {
@@ -23,14 +23,15 @@ const StyledCard = styled.article`
 `;
 
 const StyledImageContainer = styled.div`
-    display: grid;
-    place-items: center;
+    /* display: grid;
+    place-items: center; */
     margin-block: 1rem;
 `;
 
 /* eslint-disable react/prop-types */
 function Podcasts({ param }) {
     const [podcasts, setPodcasts] = useState([]);
+    const [region, setRegion] = useState('Canada');
 
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
@@ -66,6 +67,18 @@ function Podcasts({ param }) {
     return (
         <main>
             <StyledHeading>Best Podcasts - Canada</StyledHeading>
+            {/* <form onSubmit={event => event.preventDefault()}> */}
+            <form>
+                <label htmlFor="region">Region</label>
+                <select
+                    id="region"
+                    value={region}
+                    onChange={event => setRegion(event.target.value)}
+                >
+                    <option value="canada">Canada</option>
+                    <option value="us">United States</option>
+                </select>
+            </form>
             <StyledContainer>
                 {Boolean(podcasts.length) &&
                     podcasts.map(({ id, thumbnail, title, publisher, description }) => (

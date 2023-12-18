@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
     text-align: center;
-    border-block-start: 2px solid #ffbd14;
+    border-block-start: 2px solid ${({ theme }) => theme.darkTheme.borderColour};
     padding-block: 1rem;
 `;
 

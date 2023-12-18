@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledHeader = styled.header`
     text-align: center;
-    border-block-end: 2px solid #ffbd14;
+    border-block-end: 2px solid ${({ theme }) => theme.darkTheme.borderColour};
     padding-block: 1rem;
 `;
 
