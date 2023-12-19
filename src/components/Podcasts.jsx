@@ -29,14 +29,51 @@ const StyledImageContainer = styled.div`
 `;
 
 /* eslint-disable react/prop-types */
-function Podcasts({ param }) {
+function Podcasts({ param = 'best_podcasts', region = 'ca' }) {
     const [podcasts, setPodcasts] = useState([]);
-    const [region, setRegion] = useState('Canada');
+    const [selectOptions, setSelectOptions] = useState([]);
+    const [regionOptions, setRegionOptions] = useState({});
+    const [selectedRegion, setSelectedRegion] = useState(region);
 
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
     }
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        (async () => {
+            try {
+                const response = await fetch(
+                    'https://listen-api-test.listennotes.com/api/v2/regions',
+                    { signal }
+                );
+                if (!response.ok) throw `Status: ${response.status} ${response.statusText}`;
+                const data = await response.json();
+                // if (!data) throw 'No podcasts found!';
+                const { regions } = data;
+                let options = [];
+                for (const region in regions) {
+                    options.push({
+                        code: region,
+                        country: regions[region],
+                    });
+                }
+                options.sort((a, b) => (a.country > b.country ? 1 : -1));
+                setRegionOptions(regions);
+                setSelectOptions(options);
+            } catch (error) {
+                if (!abortController.signal.aborted) {
+                    console.error(error);
+                    // render error UI
+                }
+            }
+        })();
+
+        return () => abortController.abort();
+    }, []);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -52,7 +89,7 @@ function Podcasts({ param }) {
                 const data = await response.json();
                 if (!data) throw 'No podcasts found!';
                 setPodcasts(data.podcasts);
-                console.log(data);
+                // console.log(data);
             } catch (error) {
                 if (!abortController.signal.aborted) {
                     console.error(error);
@@ -66,17 +103,23 @@ function Podcasts({ param }) {
 
     return (
         <main>
-            <StyledHeading>Best Podcasts - Canada</StyledHeading>
+            <StyledHeading>Best Podcasts - {regionOptions[selectedRegion]}</StyledHeading>
             {/* <form onSubmit={event => event.preventDefault()}> */}
             <form>
                 <label htmlFor="region">Region</label>
                 <select
                     id="region"
-                    value={region}
-                    onChange={event => setRegion(event.target.value)}
+                    value={selectedRegion}
+                    onChange={event => setSelectedRegion(event.target.value)}
                 >
-                    <option value="canada">Canada</option>
-                    <option value="us">United States</option>
+                    {selectOptions.map(({ code, country }) => (
+                        <option
+                            key={code}
+                            value={code}
+                        >
+                            {country}
+                        </option>
+                    ))}
                 </select>
             </form>
             <StyledContainer>

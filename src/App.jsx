@@ -22,10 +22,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Header />
-            <Podcasts
-                param="best_podcasts"
-                region="ca"
-            />
+            <Podcasts />
             <Footer />
         </ThemeProvider>
     );
