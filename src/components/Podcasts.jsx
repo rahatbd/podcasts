@@ -57,11 +57,11 @@ function Podcasts({ param = 'best_podcasts', region = 'ca' }) {
                 let options = [];
                 for (const region in regions) {
                     options.push({
-                        code: region,
-                        country: regions[region],
+                        region,
+                        name: regions[region],
                     });
                 }
-                options.sort((a, b) => (a.country > b.country ? 1 : -1));
+                options.sort((a, b) => (a.name > b.name ? 1 : -1));
                 setRegionOptions(regions);
                 setSelectOptions(options);
             } catch (error) {
@@ -112,12 +112,12 @@ function Podcasts({ param = 'best_podcasts', region = 'ca' }) {
                     value={selectedRegion}
                     onChange={event => setSelectedRegion(event.target.value)}
                 >
-                    {selectOptions.map(({ code, country }) => (
+                    {selectOptions.map(({ region, name }) => (
                         <option
-                            key={code}
-                            value={code}
+                            key={region}
+                            value={region}
                         >
-                            {country}
+                            {name}
                         </option>
                     ))}
                 </select>
