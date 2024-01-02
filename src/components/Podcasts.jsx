@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import useFetch from '../useFetch';
 import styled from 'styled-components';
 
 const StyledHeading = styled.h2`
@@ -29,81 +30,50 @@ const StyledImageContainer = styled.div`
 `;
 
 /* eslint-disable react/prop-types */
-function Podcasts({ param = 'best_podcasts', region = 'ca' }) {
+function Podcasts() {
     const [podcasts, setPodcasts] = useState([]);
+    const [regions, setRegions] = useState({});
     const [selectOptions, setSelectOptions] = useState([]);
-    const [regionOptions, setRegionOptions] = useState({});
-    const [selectedRegion, setSelectedRegion] = useState(region);
+    const [selectedRegion, setSelectedRegion] = useState('ca');
+
+    const getRegions = useFetch('regions');
+    const getBestPodcasts = useFetch(
+        `best_podcasts?${new URLSearchParams({ region: selectedRegion })}`
+    );
+
+    useEffect(() => {
+        if (getRegions) {
+            const { regions } = getRegions;
+            let options = [];
+            for (const region in regions) {
+                options.push({
+                    region,
+                    name: regions[region],
+                });
+            }
+            options.sort((a, b) => (a.name > b.name ? 1 : -1));
+            setRegions(regions);
+            setSelectOptions(options);
+        }
+    }, [getRegions]);
+
+    useEffect(() => {
+        // let isMounted = true;
+        if (getBestPodcasts) {
+            setPodcasts(getBestPodcasts.podcasts);
+        }
+        //cleanup
+        // return () => (isMounted = false);
+    }, [getBestPodcasts]);
 
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
     }
 
-    useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        (async () => {
-            try {
-                const response = await fetch(
-                    'https://listen-api-test.listennotes.com/api/v2/regions',
-                    { signal }
-                );
-                if (!response.ok) throw `Status: ${response.status} ${response.statusText}`;
-                const data = await response.json();
-                // if (!data) throw 'No podcasts found!';
-                const { regions } = data;
-                let options = [];
-                for (const region in regions) {
-                    options.push({
-                        region,
-                        name: regions[region],
-                    });
-                }
-                options.sort((a, b) => (a.name > b.name ? 1 : -1));
-                setRegionOptions(regions);
-                setSelectOptions(options);
-            } catch (error) {
-                if (!abortController.signal.aborted) {
-                    console.error(error);
-                    // render error UI
-                }
-            }
-        })();
-
-        return () => abortController.abort();
-    }, []);
-
-    useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        (async () => {
-            try {
-                const response = await fetch(
-                    `https://listen-api-test.listennotes.com/api/v2/${param}`,
-                    { signal }
-                );
-                if (!response.ok) throw `Status: ${response.status} ${response.statusText}`;
-                const data = await response.json();
-                if (!data) throw 'No podcasts found!';
-                setPodcasts(data.podcasts);
-                // console.log(data);
-            } catch (error) {
-                if (!abortController.signal.aborted) {
-                    console.error(error);
-                    // render error UI
-                }
-            }
-        })();
-
-        return () => abortController.abort();
-    }, [param]);
-
     return (
         <main>
-            <StyledHeading>Best Podcasts - {regionOptions[selectedRegion]}</StyledHeading>
+            <StyledHeading>Best Podcasts - {regions[selectedRegion]}</StyledHeading>
             {/* <form onSubmit={event => event.preventDefault()}> */}
             <form>
                 <label htmlFor="region">Region</label>
