@@ -24,22 +24,18 @@ const StyledCard = styled.article`
 `;
 
 const StyledImageContainer = styled.div`
-    /* display: grid;
-    place-items: center; */
     margin-block: 1rem;
 `;
 
 /* eslint-disable react/prop-types */
 function Podcasts() {
     const [podcasts, setPodcasts] = useState([]);
+    const [options, setOptions] = useState([]);
     const [regions, setRegions] = useState({});
-    const [selectOptions, setSelectOptions] = useState([]);
-    const [selectedRegion, setSelectedRegion] = useState('ca');
+    const [region, setRegion] = useState('ca');
 
     const getRegions = useFetch('regions');
-    const getBestPodcasts = useFetch(
-        `best_podcasts?${new URLSearchParams({ region: selectedRegion })}`
-    );
+    const getBestPodcasts = useFetch(`best_podcasts?region=${region}`);
 
     useEffect(() => {
         if (getRegions) {
@@ -47,22 +43,19 @@ function Podcasts() {
             let options = [];
             for (const region in regions) {
                 options.push({
-                    region,
                     name: regions[region],
+                    region,
                 });
             }
             options.sort((a, b) => (a.name > b.name ? 1 : -1));
+            setOptions(options);
             setRegions(regions);
-            setSelectOptions(options);
         }
     }, [getRegions]);
 
     useEffect(() => {
         // let isMounted = true;
-        if (getBestPodcasts) {
-            setPodcasts(getBestPodcasts.podcasts);
-        }
-        //cleanup
+        if (getBestPodcasts) setPodcasts(getBestPodcasts.podcasts);
         // return () => (isMounted = false);
     }, [getBestPodcasts]);
 
@@ -73,16 +66,16 @@ function Podcasts() {
 
     return (
         <main>
-            <StyledHeading>Best Podcasts - {regions[selectedRegion]}</StyledHeading>
+            <StyledHeading>Best Podcasts - {regions[region]}</StyledHeading>
             {/* <form onSubmit={event => event.preventDefault()}> */}
             <form>
                 <label htmlFor="region">Region</label>
                 <select
                     id="region"
-                    value={selectedRegion}
-                    onChange={event => setSelectedRegion(event.target.value)}
+                    value={region}
+                    onChange={event => setRegion(event.target.value)}
                 >
-                    {selectOptions.map(({ region, name }) => (
+                    {options.map(({ name, region }) => (
                         <option
                             key={region}
                             value={region}
@@ -93,23 +86,22 @@ function Podcasts() {
                 </select>
             </form>
             <StyledContainer>
-                {Boolean(podcasts.length) &&
-                    podcasts.map(({ id, thumbnail, title, publisher, description }) => (
-                        <StyledCard key={id}>
-                            <h3>{title}</h3>
-                            <h4>by {publisher}</h4>
-                            <StyledImageContainer>
-                                <img
-                                    src={thumbnail}
-                                    alt={`${title} cover art`}
-                                    width="300"
-                                    height="300"
-                                    loading="lazy"
-                                />
-                            </StyledImageContainer>
-                            <p>{stripHtml(description)}</p>
-                        </StyledCard>
-                    ))}
+                {podcasts.map(({ id, thumbnail, title, publisher, description }) => (
+                    <StyledCard key={id}>
+                        <h3>{title}</h3>
+                        <h4>by {publisher}</h4>
+                        <StyledImageContainer>
+                            <img
+                                src={thumbnail}
+                                alt={`${title} cover art`}
+                                width="300"
+                                height="300"
+                                loading="lazy"
+                            />
+                        </StyledImageContainer>
+                        <p>{stripHtml(description)}</p>
+                    </StyledCard>
+                ))}
             </StyledContainer>
         </main>
     );

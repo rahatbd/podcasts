@@ -40,18 +40,14 @@ body {
     font-feature-settings: "cv05" 1, "cv06" 1, "cv11" 1, "cv12" 1, "cv13" 1;
     background-color: ${({ theme }) => theme.darkTheme.backgroundColour};
     color: ${({ theme }) => theme.darkTheme.colour};
-    /* font-optical-sizing: auto;
-    text-rendering: optimizeLegibility;
-   -moz-osx-font-smoothing: grayscale;
-   -webkit-font-smoothing: antialiased; */
 }
 
 #root {
-    /* --_gap: 1rem; */
+  --gap: 1rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: [full-width-start] 1fr [content-start] min(calc(1250rem / 16), calc(100% - 2rem)) [content-end] 1fr [full-width-end];
-    gap: 1rem;
+    grid-template-columns: [full-width-start] 1fr [content-start] min(calc(1250rem / 16), calc(100% - 2 * var(--gap))) [content-end] 1fr [full-width-end];
+    gap: var(--gap);
     min-block-size: 100svb;
 
     & > * {
@@ -60,14 +56,13 @@ body {
 }
 
 img {
-    /* vertical-align: middle; */
-    /* display: block; */
+    vertical-align: middle;
     max-inline-size: 100%;
-    block-size: auto;
+    /* block-size: auto; */
 
     &[alt] {
         font-style: italic;
-        font-weight: 200;
+        /* font-weight: 200; */
     }
 }
 
@@ -78,12 +73,6 @@ img {
 
 /* li {
     list-style-type: none;
-} */
-
-/* .wrapper {
-    max-inline-size: calc(1366rem / 16);
-    inline-size: 90%;
-    margin-inline: auto;
 } */
 `;
 
