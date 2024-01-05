@@ -6,15 +6,15 @@ import Footer from './components/Footer';
 
 const theme = {
     darkTheme: {
+        headerFooterBackgroundColour: '#1f1d36',
         backgroundColour: '#0f0f0f',
-        colour: '#fffbf5',
+        textColour: '#fffbf5',
         borderColour: '#776b5d',
     },
-    // css MQ
-    lightTheme: {
-        backgroundColour: '#fffbf5',
-        colour: '#0f0f0f',
-    },
+    // lightTheme: {
+    //     backgroundColour: '#fffbf5',
+    //     colour: '#0f0f0f',
+    // },
 };
 
 function App() {

@@ -39,20 +39,31 @@ body {
     font-family: "Inter", system-ui, sans-serif;
     font-feature-settings: "cv05" 1, "cv06" 1, "cv11" 1, "cv12" 1, "cv13" 1;
     background-color: ${({ theme }) => theme.darkTheme.backgroundColour};
-    color: ${({ theme }) => theme.darkTheme.colour};
+    color: ${({ theme }) => theme.darkTheme.textColour};
 }
 
 #root {
-  --gap: 1rem;
+    --gap: 1rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: [full-width-start] 1fr [content-start] min(calc(1250rem / 16), calc(100% - 2 * var(--gap))) [content-end] 1fr [full-width-end];
+    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(calc(1250rem / 16), calc(100% - 2 * var(--gap))) [wrapper-end] 1fr [full-width-end];
     gap: var(--gap);
     min-block-size: 100svb;
+}
 
-    & > * {
-        grid-column: content;
+header, footer {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: full-width;
+    background-color: ${({ theme }) => theme.darkTheme.headerFooterBackgroundColour};
+
+    & > div {
+        padding-block: 1rem;
     }
+}
+
+main, :where(header, footer) > div {
+    grid-column: wrapper;
 }
 
 img {

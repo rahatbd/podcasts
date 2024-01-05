@@ -27,6 +27,13 @@ const StyledImageContainer = styled.div`
     margin-block: 1rem;
 `;
 
+const StyledDescription = styled.p`
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+`;
+
 /* eslint-disable react/prop-types */
 function Podcasts() {
     const [podcasts, setPodcasts] = useState([]);
@@ -99,7 +106,7 @@ function Podcasts() {
                                 loading="lazy"
                             />
                         </StyledImageContainer>
-                        <p>{stripHtml(description)}</p>
+                        <StyledDescription>{stripHtml(description)}</StyledDescription>
                     </StyledCard>
                 ))}
             </StyledContainer>

@@ -1,16 +1,12 @@
-import styled from 'styled-components';
-
-const StyledHeader = styled.header`
-    text-align: center;
-    border-block-end: 2px solid ${({ theme }) => theme.darkTheme.borderColour};
-    padding-block: 1rem;
-`;
+// import styled from 'styled-components';
 
 function Header() {
     return (
-        <StyledHeader>
-            <h1>Podcasts</h1>
-        </StyledHeader>
+        <header>
+            <div>
+                <h1>Podcasts</h1>
+            </div>
+        </header>
     );
 }
 
