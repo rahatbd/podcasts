@@ -2,29 +2,53 @@ import { useState, useEffect } from 'react';
 import useFetch from '../useFetch';
 import styled from 'styled-components';
 
-const StyledHeading = styled.h2`
-    text-align: center;
-    margin-block-end: 1rem;
+const StyledCentre = styled.div`
+    display: grid;
+    justify-items: center;
 `;
 
-const StyledContainer = styled.div`
+const StyledRegions = styled(StyledCentre)`
+    row-gap: var(--space);
+    margin-block-end: var(--space);
+`;
+
+const StyledPodcasts = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(calc(400rem / 16), 100%), 1fr));
-    gap: 0.5rem;
+    gap: var(--space);
 `;
 
 const StyledCard = styled.article`
+    border: calc(1.5rem / 16) solid ${({ theme }) => theme.darkTheme.borderColour};
+    border-radius: 0.5rem;
     line-height: 1.5;
-    border: 1px solid ${({ theme }) => theme.darkTheme.borderColour};
-    padding: 1rem;
+    padding-block-end: var(--space);
 
-    & > *:not(p) {
+    & > *:not(:last-child) {
         text-align: center;
     }
 `;
 
-const StyledImageContainer = styled.div`
-    margin-block: 1rem;
+const StyledHeadings = styled.div`
+    display: grid;
+    align-content: center;
+    min-block-size: calc(100rem / 16);
+    border-block-end: calc(1.5rem / 16) solid ${({ theme }) => theme.darkTheme.borderColour};
+`;
+
+const StyledTitle = styled.h3`
+    font-weight: 800;
+    text-wrap: balance;
+`;
+
+const StyledPublisher = styled.h4`
+    font-weight: 400;
+
+    span {
+        font-weight: 100;
+        font-style: italic;
+        font-variation-settings: 'opsz' 32;
+    }
 `;
 
 const StyledDescription = styled.p`
@@ -32,9 +56,11 @@ const StyledDescription = styled.p`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
+    text-wrap: pretty;
+    max-inline-size: 70ch;
+    padding-inline: var(--space);
 `;
 
-/* eslint-disable react/prop-types */
 function Podcasts() {
     const [podcasts, setPodcasts] = useState([]);
     const [options, setOptions] = useState([]);
@@ -72,44 +98,52 @@ function Podcasts() {
     }
 
     return (
-        <main>
-            <StyledHeading>Best Podcasts - {regions[region]}</StyledHeading>
-            {/* <form onSubmit={event => event.preventDefault()}> */}
-            <form>
-                <label htmlFor="region">Region</label>
-                <select
-                    id="region"
-                    value={region}
-                    onChange={event => setRegion(event.target.value)}
-                >
-                    {options.map(({ name, region }) => (
-                        <option
-                            key={region}
-                            value={region}
-                        >
-                            {name}
-                        </option>
-                    ))}
-                </select>
-            </form>
-            <StyledContainer>
+        <main className="wrapper">
+            <StyledRegions>
+                <h2>Best Podcasts: {regions[region]}</h2>
+                {/* <form onSubmit={event => event.preventDefault()}> */}
+                <form>
+                    <label htmlFor="region">Region&nbsp;</label>
+                    <select
+                        id="region"
+                        value={region}
+                        onChange={event => setRegion(event.target.value)}
+                    >
+                        {options.map(({ name, region }) => (
+                            <option
+                                key={region}
+                                value={region}
+                            >
+                                {name}
+                            </option>
+                        ))}
+                    </select>
+                </form>
+            </StyledRegions>
+            <StyledPodcasts>
                 {podcasts.map(({ id, thumbnail, title, publisher, description }) => (
                     <StyledCard key={id}>
-                        <h3>{title}</h3>
-                        <h4>by {publisher}</h4>
-                        <StyledImageContainer>
+                        <StyledHeadings>
+                            <StyledTitle>{title}</StyledTitle>
+                            <StyledPublisher>
+                                <span>by</span> {publisher}
+                            </StyledPublisher>
+                        </StyledHeadings>
+                        <div>
                             <img
                                 src={thumbnail}
                                 alt={`${title} cover art`}
                                 width="300"
                                 height="300"
-                                loading="lazy"
+                                // loading="lazy"
                             />
-                        </StyledImageContainer>
-                        <StyledDescription>{stripHtml(description)}</StyledDescription>
+                        </div>
+                        <StyledCentre>
+                            <StyledDescription>{stripHtml(description)}</StyledDescription>
+                        </StyledCentre>
                     </StyledCard>
                 ))}
-            </StyledContainer>
+            </StyledPodcasts>
         </main>
     );
 }

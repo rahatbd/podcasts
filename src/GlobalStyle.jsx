@@ -31,10 +31,6 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     src: url("InterVariableItalic-v4.woff2") format(woff2) tech(variations);
 }
 
-/* html {
-    scroll-behavior: smooth;
-} */
-
 body {
     font-family: "Inter", system-ui, sans-serif;
     font-feature-settings: "cv05" 1, "cv06" 1, "cv11" 1, "cv12" 1, "cv13" 1;
@@ -43,11 +39,11 @@ body {
 }
 
 #root {
-    --gap: 1rem;
+    --space: 1rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(calc(1250rem / 16), calc(100% - 2 * var(--gap))) [wrapper-end] 1fr [full-width-end];
-    gap: var(--gap);
+    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(calc(1250rem / 16), calc(100% - 2 * var(--space))) [wrapper-end] 1fr [full-width-end];
+    gap: var(--space);
     min-block-size: 100svb;
 }
 
@@ -56,13 +52,10 @@ header, footer {
     grid-template-columns: subgrid;
     grid-column: full-width;
     background-color: ${({ theme }) => theme.darkTheme.headerFooterBackgroundColour};
-
-    & > div {
-        padding-block: 1rem;
-    }
+    padding-block: var(--space);
 }
 
-main, :where(header, footer) > div {
+.wrapper {
     grid-column: wrapper;
 }
 
@@ -70,6 +63,7 @@ img {
     vertical-align: middle;
     max-inline-size: 100%;
     /* block-size: auto; */
+    margin-block: var(--space);
 
     &[alt] {
         font-style: italic;
@@ -85,6 +79,17 @@ img {
 /* li {
     list-style-type: none;
 } */
+
+/* @media (prefers-reduced-motion: no-preference) {
+    :has(:target) {
+        scroll-behavior: smooth;
+    }
+} */
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+}
 `;
 
 export default GlobalStyle;

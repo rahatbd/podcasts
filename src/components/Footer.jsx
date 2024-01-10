@@ -3,7 +3,7 @@
 function Footer() {
     return (
         <footer>
-            <div>
+            <div className="wrapper">
                 <p>&copy; Rahat Rahman 2024</p>
                 <small>Powered by Listen Notes</small>
             </div>

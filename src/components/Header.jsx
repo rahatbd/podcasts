@@ -3,7 +3,7 @@
 function Header() {
     return (
         <header>
-            <div>
+            <div className="wrapper">
                 <h1>Podcasts</h1>
             </div>
         </header>

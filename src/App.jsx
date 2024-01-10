@@ -9,7 +9,7 @@ const theme = {
         headerFooterBackgroundColour: '#1f1d36',
         backgroundColour: '#0f0f0f',
         textColour: '#fffbf5',
-        borderColour: '#776b5d',
+        borderColour: '#eef5ff',
     },
     // lightTheme: {
     //     backgroundColour: '#fffbf5',
