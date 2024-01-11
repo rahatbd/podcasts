@@ -6,10 +6,9 @@ import Footer from './components/Footer';
 
 const theme = {
     darkTheme: {
-        headerFooterBackgroundColour: '#1f1d36',
+        accentColour: '#1a1a2e',
         backgroundColour: '#0f0f0f',
         textColour: '#fffbf5',
-        borderColour: '#eef5ff',
     },
     // lightTheme: {
     //     backgroundColour: '#fffbf5',

@@ -51,7 +51,7 @@ header, footer {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: full-width;
-    background-color: ${({ theme }) => theme.darkTheme.headerFooterBackgroundColour};
+    background-color: ${({ theme }) => theme.darkTheme.accentColour};
     padding-block: var(--space);
 }
 
@@ -63,11 +63,10 @@ img {
     vertical-align: middle;
     max-inline-size: 100%;
     /* block-size: auto; */
-    margin-block: var(--space);
 
     &[alt] {
         font-style: italic;
-        /* font-weight: 200; */
+        font-weight: 200;
     }
 }
 
