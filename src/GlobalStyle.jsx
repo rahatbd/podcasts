@@ -60,9 +60,9 @@ header, footer {
 }
 
 img {
-    vertical-align: middle;
     max-inline-size: 100%;
-    /* block-size: auto; */
+    block-size: auto;
+    /* vertical-align: middle; */
 
     &[alt] {
         font-style: italic;

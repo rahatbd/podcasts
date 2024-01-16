@@ -2,22 +2,13 @@ import { useState, useEffect } from 'react';
 import useFetch from '../useFetch';
 import styled from 'styled-components';
 
-const StyledCentreDiv = styled.div`
-    display: grid;
-    justify-items: center;
-    padding-inline: var(--space);
-`;
-
 const StyledForm = styled.form`
     display: flex;
+    align-items: baseline;
     justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
     gap: var(--space);
     margin-block-end: var(--space);
-
-    @media (width <= calc(450rem / 16)) {
-        flex-direction: column;
-    }
 `;
 
 const StyledLabel = styled.label`
@@ -52,12 +43,12 @@ const StyledSelect = styled.select`
     min-inline-size: calc(250rem / 16);
     padding: 0.5rem 1rem;
 
-    @media (any-hover: hover) {
-        &:focus-visible {
-            outline: calc(1rem / 16) solid;
-            filter: drop-shadow(0 0 calc(2rem / 16));
-        }
+    /* @media (any-hover: hover) { */
+    &:focus-visible {
+        outline: calc(1rem / 16) solid;
+        filter: drop-shadow(0 0 calc(2rem / 16));
     }
+    /* } */
 `;
 
 const StyledPodcastsDiv = styled.div`
@@ -74,50 +65,43 @@ const StyledArticle = styled.article`
     line-height: 1.5;
 `;
 
+const StyledCentreDiv = styled.div`
+    display: grid;
+    place-content: center;
+    padding-inline: var(--space);
+
+    ${StyledArticle} > &:not(:last-child) {
+        border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
+    }
+`;
+
 const StyledHeadingsDiv = styled(StyledCentreDiv)`
-    align-content: center;
     text-align: center;
     text-wrap: balance;
     min-block-size: calc(110rem / 16);
-    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
 `;
 
-const StyledTitleH2 = styled.h2`
+const StyledH2 = styled.h2`
     font-size: 1.1rem;
     font-weight: 800;
 `;
 
-const StyledPublisherH3 = styled.h3`
+const StyledH3 = styled.h3`
     font-size: 1rem;
     font-weight: 300;
 `;
 
-const StyledBySpan = styled.span`
+const StyledSpan = styled.span`
     font-style: italic;
     font-weight: 100;
     font-variation-settings: 'opsz' 32;
-`;
-
-const StyledImageDiv = styled(StyledCentreDiv)`
-    --size: calc(300rem / 16);
-    min-block-size: var(--size);
-    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
-
-    @media (width <= calc(400rem / 16)) {
-        padding-inline: 0;
-    }
-`;
-
-const StyledImg = styled.img`
-    inline-size: var(--size);
-    block-size: var(--size);
 `;
 
 const StyledDescriptionDiv = styled(StyledCentreDiv)`
     margin-block: var(--space);
 `;
 
-const StyledDescriptionP = styled.p`
+const StyledP = styled.p`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
@@ -142,6 +126,7 @@ function Podcasts() {
             for (const region in regions) {
                 options.push({
                     name: regions[region],
+                    // [regions[region]]: getFlagEmoji(region),
                     region,
                 });
             }
@@ -160,6 +145,25 @@ function Podcasts() {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
     }
+
+    /**
+     * Get the flag emoji for the country
+     * @link https://dev.to/jorik/country-code-to-flag-emoji-a21
+     * @param  {String} countryCode The country code
+     * @return {String}             The flag emoji
+     */
+    // function getFlagEmoji(countryCode) {
+    //     const codePoints = countryCode
+    //         .toUpperCase()
+    //         .split('')
+    //         .map(char => 127397 + char.charCodeAt());
+    //     return String.fromCodePoint(...codePoints);
+    // }
+
+    // function displayFlag(country) {
+    //     const flag = options.find(option => option[country]);
+    //     return flag?.[country];
+    // }
 
     return (
         <main className="wrapper">
@@ -185,26 +189,31 @@ function Podcasts() {
                 </StyledArrowDiv>
             </StyledForm>
             <StyledPodcastsDiv>
-                {podcasts.map(({ id, thumbnail, title, publisher, description }) => (
+                {podcasts.map(({ id, title, publisher, thumbnail, description }) => (
                     <StyledArticle key={id}>
                         <StyledHeadingsDiv>
-                            <StyledTitleH2>{title}</StyledTitleH2>
-                            <StyledPublisherH3>
-                                <StyledBySpan>by</StyledBySpan> {publisher}
-                            </StyledPublisherH3>
+                            <StyledH2>{title}</StyledH2>
+                            <StyledH3>
+                                <StyledSpan>by</StyledSpan> {publisher}
+                            </StyledH3>
                         </StyledHeadingsDiv>
-                        <StyledImageDiv>
-                            <StyledImg
+                        <StyledCentreDiv>
+                            <img
                                 src={thumbnail}
                                 alt={`${title} cover art`}
                                 width="300" //url value
                                 height="300"
                                 // loading="lazy"
                             />
-                        </StyledImageDiv>
+                        </StyledCentreDiv>
                         <StyledDescriptionDiv>
-                            <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
+                            <StyledP>{stripHtml(description)}</StyledP>
                         </StyledDescriptionDiv>
+                        {/* <div style={{ display: 'none' }}>
+                            <p>
+                                Country: {country} {displayFlag(country)}
+                            </p>
+                        </div> */}
                     </StyledArticle>
                 ))}
             </StyledPodcastsDiv>
