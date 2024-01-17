@@ -40,7 +40,7 @@ const StyledSelect = styled.select`
     font: inherit;
     font-size: 1.25rem;
     font-weight: 800;
-    min-inline-size: calc(250rem / 16);
+    min-inline-size: calc(270rem / 16);
     padding: 0.5rem 1rem;
 
     /* @media (any-hover: hover) { */
@@ -70,7 +70,7 @@ const StyledCentreDiv = styled.div`
     place-content: center;
     padding-inline: var(--space);
 
-    ${StyledArticle} > &:not(:last-child) {
+    ${StyledArticle} > & {
         border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
     }
 `;
@@ -98,10 +98,11 @@ const StyledSpan = styled.span`
 `;
 
 const StyledDescriptionDiv = styled(StyledCentreDiv)`
-    margin-block: var(--space);
+    min-block-size: calc(130rem / 16);
+    padding-block: var(--space);
 `;
 
-const StyledP = styled.p`
+const StyledDescriptionP = styled.p`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
@@ -109,6 +110,12 @@ const StyledP = styled.p`
     font-weight: 450;
     text-wrap: pretty;
     max-inline-size: 70ch;
+`;
+
+const StyledCountryP = styled.p`
+    font-weight: 250;
+    text-align: center;
+    padding: calc(var(--space) / 2) var(--space);
 `;
 
 function Podcasts() {
@@ -126,7 +133,6 @@ function Podcasts() {
             for (const region in regions) {
                 options.push({
                     name: regions[region],
-                    // [regions[region]]: getFlagEmoji(region),
                     region,
                 });
             }
@@ -147,23 +153,21 @@ function Podcasts() {
     }
 
     /**
-     * Get the flag emoji for the country
+     * Get the flag emoji for a country
      * @link https://dev.to/jorik/country-code-to-flag-emoji-a21
-     * @param  {String} countryCode The country code
-     * @return {String}             The flag emoji
+     * @param  {String} name The country name
+     * @return {String}      The flag emoji
      */
-    // function getFlagEmoji(countryCode) {
-    //     const codePoints = countryCode
-    //         .toUpperCase()
-    //         .split('')
-    //         .map(char => 127397 + char.charCodeAt());
-    //     return String.fromCodePoint(...codePoints);
-    // }
-
-    // function displayFlag(country) {
-    //     const flag = options.find(option => option[country]);
-    //     return flag?.[country];
-    // }
+    function flagEmoji(name) {
+        const country = options.find(option => option.name === name);
+        if (country) {
+            const codePoints = country.region
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt());
+            return String.fromCodePoint(...codePoints);
+        }
+    }
 
     return (
         <main className="wrapper">
@@ -182,14 +186,14 @@ function Podcasts() {
                                 key={region}
                                 value={region}
                             >
-                                {name}
+                                {name} {flagEmoji(name)}
                             </option>
                         ))}
                     </StyledSelect>
                 </StyledArrowDiv>
             </StyledForm>
             <StyledPodcastsDiv>
-                {podcasts.map(({ id, title, publisher, thumbnail, description }) => (
+                {podcasts.map(({ id, title, publisher, thumbnail, description, country }) => (
                     <StyledArticle key={id}>
                         <StyledHeadingsDiv>
                             <StyledH2>{title}</StyledH2>
@@ -207,13 +211,11 @@ function Podcasts() {
                             />
                         </StyledCentreDiv>
                         <StyledDescriptionDiv>
-                            <StyledP>{stripHtml(description)}</StyledP>
+                            <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
                         </StyledDescriptionDiv>
-                        {/* <div style={{ display: 'none' }}>
-                            <p>
-                                Country: {country} {displayFlag(country)}
-                            </p>
-                        </div> */}
+                        <StyledCountryP>
+                            Country: {country} {flagEmoji(country)}
+                        </StyledCountryP>
                     </StyledArticle>
                 ))}
             </StyledPodcastsDiv>
