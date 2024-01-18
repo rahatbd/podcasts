@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useFetch from '../useFetch';
+import Flag from 'react-world-flags';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
@@ -14,6 +15,7 @@ const StyledForm = styled.form`
 const StyledLabel = styled.label`
     font-size: 1.5rem;
     font-weight: 550;
+    text-shadow: 0 0 calc(2rem / 16);
 `;
 
 const StyledArrowDiv = styled.div`
@@ -25,7 +27,7 @@ const StyledArrowDiv = styled.div`
         --border-inline-size: calc(7rem / 16);
         content: '';
         position: absolute;
-        right: 5%;
+        inset-inline-end: 5%;
         border-block-start: var(--border-inline-size) solid;
         border-inline: var(--border-inline-size) solid transparent;
         pointer-events: none;
@@ -33,6 +35,7 @@ const StyledArrowDiv = styled.div`
 `;
 
 const StyledSelect = styled.select`
+    --inline-size: 250px;
     appearance: none;
     background-color: ${({ theme }) => theme.darkTheme.accentColour};
     border: none;
@@ -40,15 +43,15 @@ const StyledSelect = styled.select`
     font: inherit;
     font-size: 1.25rem;
     font-weight: 800;
-    min-inline-size: calc(270rem / 16);
+    min-inline-size: var(--inline-size);
+    inline-size: max(var(--inline-size), 100%);
+    cursor: pointer;
     padding: 0.5rem 1rem;
 
-    /* @media (any-hover: hover) { */
-    &:focus-visible {
+    &:focus {
         outline: calc(1rem / 16) solid;
         filter: drop-shadow(0 0 calc(2rem / 16));
     }
-    /* } */
 `;
 
 const StyledPodcastsDiv = styled.div`
@@ -68,11 +71,8 @@ const StyledArticle = styled.article`
 const StyledCentreDiv = styled.div`
     display: grid;
     place-content: center;
+    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
     padding-inline: var(--space);
-
-    ${StyledArticle} > & {
-        border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
-    }
 `;
 
 const StyledHeadingsDiv = styled(StyledCentreDiv)`
@@ -97,6 +97,11 @@ const StyledSpan = styled.span`
     font-variation-settings: 'opsz' 32;
 `;
 
+const StyledImg = styled.img`
+    inline-size: calc(300rem / 16);
+    aspect-ratio: 1;
+`;
+
 const StyledDescriptionDiv = styled(StyledCentreDiv)`
     min-block-size: calc(130rem / 16);
     padding-block: var(--space);
@@ -116,6 +121,12 @@ const StyledCountryP = styled.p`
     font-weight: 250;
     text-align: center;
     padding: calc(var(--space) / 2) var(--space);
+
+    img {
+        position: relative;
+        inset-block-start: calc(1rem / 16);
+        inline-size: 1.5rem;
+    }
 `;
 
 function Podcasts() {
@@ -152,21 +163,9 @@ function Podcasts() {
         return string.body.textContent || '';
     }
 
-    /**
-     * Get the flag emoji for a country
-     * @link https://dev.to/jorik/country-code-to-flag-emoji-a21
-     * @param  {String} name The country name
-     * @return {String}      The flag emoji
-     */
-    function flagEmoji(name) {
-        const country = options.find(option => option.name === name);
-        if (country) {
-            const codePoints = country.region
-                .toUpperCase()
-                .split('')
-                .map(char => 127397 + char.charCodeAt());
-            return String.fromCodePoint(...codePoints);
-        }
+    function findRegion(country) {
+        const { region } = options.length && options.find(({ name }) => name === country);
+        return region;
     }
 
     return (
@@ -186,7 +185,7 @@ function Podcasts() {
                                 key={region}
                                 value={region}
                             >
-                                {name} {flagEmoji(name)}
+                                {name}
                             </option>
                         ))}
                     </StyledSelect>
@@ -202,7 +201,7 @@ function Podcasts() {
                             </StyledH3>
                         </StyledHeadingsDiv>
                         <StyledCentreDiv>
-                            <img
+                            <StyledImg
                                 src={thumbnail}
                                 alt={`${title} cover art`}
                                 width="300" //url value
@@ -214,7 +213,12 @@ function Podcasts() {
                             <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
                         </StyledDescriptionDiv>
                         <StyledCountryP>
-                            Country: {country} {flagEmoji(country)}
+                            Country: {country}{' '}
+                            <Flag
+                                code={findRegion(country)}
+                                // width="24"
+                                alt={`${country} flag`}
+                            />
                         </StyledCountryP>
                     </StyledArticle>
                 ))}
