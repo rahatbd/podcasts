@@ -16,24 +16,36 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 /*----------------------------------------------------------------------------------------------------------------------------*/
 
 @font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 100 900;
+    font-family: Decovar;
     font-display: swap;
-    src: url("InterVariable-v4.woff2") format(woff2) tech(variations);
+    src: url(Decovar.woff2) format(woff2) tech(variations);
 }
 
 @font-face {
-    font-family: "Inter";
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url(InterVariable-v4.woff2) format(woff2) tech(variations);
+}
+
+@font-face {
+    font-family: Inter;
     font-style: italic;
     font-weight: 100 900;
     font-display: swap;
-    src: url("InterVariableItalic-v4.woff2") format(woff2) tech(variations);
+    src: url(InterVariableItalic-v4.woff2) format(woff2) tech(variations);
 }
 
+/* @font-face {
+    font-family: emoji;
+    src: local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol"), local("Noto Color Emoji");
+} */
+
 body {
-    font-family: "Inter", system-ui, sans-serif;
-    font-feature-settings: "cv05" 1, "cv06" 1, "cv11" 1, "cv12" 1, "cv13" 1;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", emoji; */
+    font-feature-settings: "cv06" 1, "cv11" 1, "ss01" 1, "ss03" 1, "ss04" 1;
     background-color: ${({ theme }) => theme.darkTheme.backgroundColour};
     color: ${({ theme }) => theme.darkTheme.textColour};
 }
@@ -62,7 +74,7 @@ header, footer {
 img {
     max-inline-size: 100%;
     block-size: auto;
-    /* vertical-align: middle; */
+    vertical-align: middle;
 
     &[alt] {
         font-style: italic;
@@ -84,11 +96,6 @@ img {
         scroll-behavior: smooth;
     }
 } */
-
-h1 {
-    text-transform: uppercase;
-    text-align: center;
-}
 `;
 
 export default GlobalStyle;

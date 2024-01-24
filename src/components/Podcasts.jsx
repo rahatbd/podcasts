@@ -9,6 +9,7 @@ const StyledForm = styled.form`
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--space);
+    text-align: center;
     margin-block-end: var(--space);
 `;
 
@@ -97,7 +98,7 @@ const StyledSpan = styled.span`
     font-variation-settings: 'opsz' 32;
 `;
 
-const StyledImg = styled.img`
+const StyledPodcastImg = styled.img`
     inline-size: calc(300rem / 16);
     aspect-ratio: 1;
 `;
@@ -121,12 +122,10 @@ const StyledCountryP = styled.p`
     font-weight: 250;
     text-align: center;
     padding: calc(var(--space) / 2) var(--space);
+`;
 
-    img {
-        position: relative;
-        inset-block-start: calc(1rem / 16);
-        inline-size: 1.5rem;
-    }
+const StyledFlagImg = styled(Flag)`
+    inline-size: 1.5rem;
 `;
 
 function Podcasts() {
@@ -201,7 +200,7 @@ function Podcasts() {
                             </StyledH3>
                         </StyledHeadingsDiv>
                         <StyledCentreDiv>
-                            <StyledImg
+                            <StyledPodcastImg
                                 src={thumbnail}
                                 alt={`${title} cover art`}
                                 width="300" //url value
@@ -214,9 +213,9 @@ function Podcasts() {
                         </StyledDescriptionDiv>
                         <StyledCountryP>
                             Country: {country}{' '}
-                            <Flag
+                            <StyledFlagImg
                                 code={findRegion(country)}
-                                // width="24"
+                                width="24"
                                 alt={`${country} flag`}
                             />
                         </StyledCountryP>
