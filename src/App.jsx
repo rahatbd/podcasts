@@ -9,6 +9,7 @@ const theme = {
         accentColour: '#1a1a2e',
         backgroundColour: '#0f0f0f',
         textColour: '#fffbf5',
+        visitedColour: '#b3a492',
     },
     // lightTheme: {
     //     backgroundColour: '#fffbf5',

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 /*----------------------------------------------------------------------------------------------------------------------------*/
@@ -37,15 +37,9 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     src: url(InterVariableItalic-v4.woff2) format(woff2) tech(variations);
 }
 
-/* @font-face {
-    font-family: emoji;
-    src: local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol"), local("Noto Color Emoji");
-} */
-
 body {
     font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    /* font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", emoji; */
-    font-feature-settings: "cv06" 1, "cv11" 1, "ss01" 1, "ss03" 1, "ss04" 1;
+    font-feature-settings: "cv06", "cv11", "ss01", "ss03", "ss04";
     background-color: ${({ theme }) => theme.darkTheme.backgroundColour};
     color: ${({ theme }) => theme.darkTheme.textColour};
 }
@@ -54,7 +48,7 @@ body {
     --space: 1rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(calc(1250rem / 16), calc(100% - 2 * var(--space))) [wrapper-end] 1fr [full-width-end];
+    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(1250px, 100% - 2 * var(--space)) [wrapper-end] 1fr [full-width-end];
     gap: var(--space);
     min-block-size: 100svb;
 }
@@ -82,20 +76,17 @@ img {
     }
 }
 
-/* a {
+a {
     color: inherit;
-    text-decoration-style: none;
-} */
+}
+`;
 
-/* li {
-    list-style-type: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-    :has(:target) {
-        scroll-behavior: smooth;
-    }
-} */
+export const flexCentre = css`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space);
+    text-align: center;
 `;
 
 export default GlobalStyle;

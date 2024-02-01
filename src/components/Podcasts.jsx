@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
+import { flexCentre } from '../GlobalStyle';
 import useFetch from '../useFetch';
 import Flag from 'react-world-flags';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-    display: flex;
+    ${flexCentre}
+    /* display: flex; */
     align-items: baseline;
-    justify-content: center;
+    /* justify-content: center;
     flex-wrap: wrap;
     gap: var(--space);
-    text-align: center;
+    text-align: center; */
     margin-block-end: var(--space);
 `;
 
@@ -57,7 +59,7 @@ const StyledSelect = styled.select`
 
 const StyledPodcastsDiv = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(calc(400rem / 16), 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
     gap: var(--space);
 `;
 
@@ -67,6 +69,7 @@ const StyledArticle = styled.article`
     border-radius: 0.5rem;
     box-shadow: 0 0 0.5rem ${({ theme }) => theme.darkTheme.accentColour};
     line-height: 1.5;
+    contain: content;
 `;
 
 const StyledCentreDiv = styled.div`
@@ -85,6 +88,7 @@ const StyledHeadingsDiv = styled(StyledCentreDiv)`
 const StyledH2 = styled.h2`
     font-size: 1.1rem;
     font-weight: 800;
+    letter-spacing: calc(1rem / 16);
 `;
 
 const StyledH3 = styled.h3`
@@ -119,13 +123,13 @@ const StyledDescriptionP = styled.p`
 `;
 
 const StyledCountryP = styled.p`
-    font-weight: 250;
+    font-weight: 200;
     text-align: center;
     padding: calc(var(--space) / 2) var(--space);
 `;
 
 const StyledFlagImg = styled(Flag)`
-    inline-size: 1.5rem;
+    inline-size: 1lh;
 `;
 
 function Podcasts() {
@@ -214,9 +218,9 @@ function Podcasts() {
                         <StyledCountryP>
                             Country: {country}{' '}
                             <StyledFlagImg
+                                alt={`${country} flag`}
                                 code={findRegion(country)}
                                 width="24"
-                                alt={`${country} flag`}
                             />
                         </StyledCountryP>
                     </StyledArticle>
