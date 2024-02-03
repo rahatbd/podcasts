@@ -1,7 +1,8 @@
 import { flexCentre } from '../GlobalStyle';
+import styled, { useTheme } from 'styled-components';
 import newTabIcon from '../assets/new-tab.svg';
-import listenNotes from '../assets/listen-notes-white.png';
-import styled from 'styled-components';
+import listenNotesBlack from '../assets/listen-notes-black.png';
+import listenNotesWhite from '../assets/listen-notes-white.png';
 
 // const StyledCopyrightLinksDiv = styled.div`
 //     display: flex;
@@ -17,7 +18,7 @@ const StyledCopyrightLinksDiv = styled.div`
 
 const StyledSmall = styled.small`
     font-size: 100%;
-    font-weight: 300;
+    font-weight: 350;
 `;
 
 const StyledUl = styled.ul`
@@ -44,7 +45,7 @@ const StyledLinksA = styled.a`
     text-underline-offset: 0.25rem;
 
     &:visited {
-        color: ${({ theme }) => theme.darkTheme.visitedColour};
+        color: ${({ theme }) => theme.visitedColour};
     }
 
     /* @media (any-hover: hover) {} */
@@ -99,6 +100,8 @@ const StyledListenNotesImg = styled.img`
 `;
 
 function Footer() {
+    const theme = useTheme();
+
     return (
         <footer>
             <div className="wrapper">
@@ -133,7 +136,7 @@ function Footer() {
                         rel="noreferrer"
                     >
                         <StyledListenNotesImg
-                            src={listenNotes}
+                            src={theme.name === 'dark' ? listenNotesWhite : listenNotesBlack}
                             alt="powered by LISTEN NOTES"
                         />
                     </StyledListenNotesA>

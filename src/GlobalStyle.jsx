@@ -40,8 +40,8 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 body {
     font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-feature-settings: "cv06", "cv11", "ss01", "ss03", "ss04";
-    background-color: ${({ theme }) => theme.darkTheme.backgroundColour};
-    color: ${({ theme }) => theme.darkTheme.textColour};
+    background-color: ${({ theme }) => theme.backgroundColour};
+    color: ${({ theme }) => theme.textColour};
 }
 
 #root {
@@ -57,7 +57,7 @@ header, footer {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: full-width;
-    background-color: ${({ theme }) => theme.darkTheme.accentColour};
+    background-color: ${({ theme }) => theme.accentColour};
     padding-block: var(--space);
 }
 

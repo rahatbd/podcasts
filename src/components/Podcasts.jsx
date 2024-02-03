@@ -18,7 +18,7 @@ const StyledForm = styled.form`
 const StyledLabel = styled.label`
     font-size: 1.5rem;
     font-weight: 550;
-    text-shadow: 0 0 calc(2rem / 16);
+    text-shadow: 0 0 calc(1rem / 16);
 `;
 
 const StyledArrowDiv = styled.div`
@@ -40,7 +40,7 @@ const StyledArrowDiv = styled.div`
 const StyledSelect = styled.select`
     --inline-size: 250px;
     appearance: none;
-    background-color: ${({ theme }) => theme.darkTheme.accentColour};
+    background-color: ${({ theme }) => theme.accentColour};
     border: none;
     border-radius: 0.5rem;
     font: inherit;
@@ -53,7 +53,7 @@ const StyledSelect = styled.select`
 
     &:focus {
         outline: calc(1rem / 16) solid;
-        filter: drop-shadow(0 0 calc(2rem / 16));
+        filter: drop-shadow(0 0 calc(1rem / 16));
     }
 `;
 
@@ -65,9 +65,9 @@ const StyledPodcastsDiv = styled.div`
 
 const StyledArticle = styled.article`
     --border-inline-size: calc(1.5rem / 16);
-    border: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
+    border: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem ${({ theme }) => theme.darkTheme.accentColour};
+    box-shadow: 0 0 0.5rem ${({ theme }) => theme.accentColour};
     line-height: 1.5;
     contain: content;
 `;
@@ -75,7 +75,7 @@ const StyledArticle = styled.article`
 const StyledCentreDiv = styled.div`
     display: grid;
     place-content: center;
-    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.darkTheme.accentColour};
+    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
     padding-inline: var(--space);
 `;
 
@@ -93,12 +93,12 @@ const StyledH2 = styled.h2`
 
 const StyledH3 = styled.h3`
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
 `;
 
 const StyledSpan = styled.span`
     font-style: italic;
-    font-weight: 100;
+    font-weight: 200;
     font-variation-settings: 'opsz' 32;
 `;
 
@@ -123,7 +123,7 @@ const StyledDescriptionP = styled.p`
 `;
 
 const StyledCountryP = styled.p`
-    font-weight: 200;
+    font-weight: 300;
     text-align: center;
     padding: calc(var(--space) / 2) var(--space);
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledH1 = styled.h1`
-    --text-shadow: 0 0 0.25rem;
+    --text-shadow: 0 0 calc(2rem / 16);
     font-family: Decovar, Inter, ui-sans-serif, system-ui, sans-serif;
     font-size: 2.5rem;
     font-weight: 500;
