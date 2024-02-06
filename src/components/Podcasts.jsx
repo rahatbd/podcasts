@@ -209,7 +209,7 @@ function Podcasts() {
                                 alt={`${title} cover art`}
                                 width="300" //url value
                                 height="300"
-                                // loading="lazy"
+                                loading="lazy"
                             />
                         </StyledCentreDiv>
                         <StyledDescriptionDiv>

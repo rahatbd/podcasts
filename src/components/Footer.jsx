@@ -26,7 +26,7 @@ const StyledUl = styled.ul`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: calc(var(--space) / 2);
+    gap: var(--space);
 `;
 
 const StyledLi = styled.li`
@@ -37,7 +37,7 @@ const StyledLi = styled.li`
         display: inline-block;
         vertical-align: middle;
         rotate: 15deg;
-        margin-inline-start: calc(var(--space) / 2);
+        margin-inline-start: var(--space);
     }
 `;
 
@@ -53,20 +53,21 @@ const StyledLinksA = styled.a`
         text-decoration-style: wavy;
     }
 
+    /* global */
     &:focus-visible {
-        outline: calc(1rem / 16) dashed;
+        outline: calc(2rem / 16) solid;
         outline-offset: 0.25rem;
         border-radius: 0.25rem;
         text-decoration-line: none;
     }
 
-    &:active {
-        font-weight: 450;
+    ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
+    ${StyledLi}:has(+ ${StyledLi} &:where(:hover, :focus-visible)) & {
+        opacity: 0.65;
     }
 
-    ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
-    ${StyledLi}:has(+ * &:where(:hover, :focus-visible)) & {
-        opacity: 0.5;
+    &:active {
+        font-style: italic;
     }
 `;
 
@@ -77,7 +78,7 @@ const StyledNewTabImg = styled.img`
 
 const StyledListenNotesDiv = styled.div`
     text-align: center;
-    margin-block-start: var(--space);
+    margin-block-start: 1.5rem;
 `;
 
 const StyledListenNotesA = styled.a`
@@ -88,7 +89,7 @@ const StyledListenNotesA = styled.a`
     }
 
     &:focus-visible {
-        outline: calc(1rem / 16) dashed;
+        outline: calc(2rem / 16) dashed;
         outline-offset: 0.5rem;
         border-radius: 0.25rem;
     }
@@ -106,9 +107,7 @@ function Footer() {
         <footer>
             <div className="wrapper">
                 <StyledCopyrightLinksDiv>
-                    <p>
-                        <StyledSmall>&copy; Rahat Rahman 2024</StyledSmall>
-                    </p>
+                    <StyledSmall>&copy; Rahat Rahman 2024</StyledSmall>
                     <StyledUl>
                         <StyledLi>
                             <StyledLinksA href="/">Portfolio</StyledLinksA>

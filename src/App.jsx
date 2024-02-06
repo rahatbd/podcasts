@@ -18,7 +18,7 @@ const lightTheme = {
     accentColour: '#f7efe5',
     backgroundColour: darkTheme.textColour,
     textColour: darkTheme.backgroundColour,
-    visitedColour: '#40128b',
+    visitedColour: '#643a6b',
 };
 
 const darkMode = window.matchMedia('(prefers-color-scheme: dark)');

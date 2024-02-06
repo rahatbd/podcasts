@@ -13,6 +13,7 @@ const StyledH1 = styled.h1`
     overflow-x: auto;
     overflow-inline: auto;
 
+    /* https://www.youtube.com/watch?v=-5CY-7nAeSI */
     /* https://caniuse.com/?search=overflow-inline */
     /* @supports not (overflow-inline: auto) {
         overflow-x: auto;
