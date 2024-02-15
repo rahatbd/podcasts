@@ -1,4 +1,4 @@
-import useFetch from '../useFetch';
+import useFetch from '../hooks/useFetch';
 import Flag from 'react-world-flags';
 import styled from 'styled-components';
 

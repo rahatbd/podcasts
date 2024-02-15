@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { flexCentre } from '../GlobalStyle';
-import useStickyState from '../useStickyState';
-import useFetch from '../useFetch';
+import useStickyState from '../hooks/useStickyState';
+import useFetch from '../hooks/useFetch';
 import Podcasts from './Podcasts';
 import styled from 'styled-components';
 
@@ -100,6 +100,10 @@ function Regions() {
                     </StyledSelect>
                 </StyledArrowDiv>
             </StyledForm>
+            {/* <p>
+                Please note that podcasts that are &quot;best&quot; in a country/region may not be
+                produced in that country/region.
+            </p> */}
             <Podcasts
                 options={options}
                 region={region}
