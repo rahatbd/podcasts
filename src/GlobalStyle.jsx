@@ -79,10 +79,6 @@ img {
 a {
     color: inherit;
 }
-
-footer {
-    padding-block: 1.5rem;
-}
 `;
 
 export const flexCentre = css`

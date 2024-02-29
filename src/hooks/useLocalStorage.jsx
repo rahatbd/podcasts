@@ -7,10 +7,10 @@ import { useState, useEffect } from 'react';
  * @param {string} key          localStorage key name
  * @returns {string, function}  localStorage or default value and setter function
  */
-function useStickyState(defaultValue, key) {
+function useLocalStorage(defaultValue, key) {
     const [value, setValue] = useState(() => {
-        const stickyValue = window.localStorage.getItem(key);
-        return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;
+        const localStorageValue = window.localStorage.getItem(key);
+        return localStorageValue !== null ? JSON.parse(localStorageValue) : defaultValue;
     });
 
     useEffect(() => {
@@ -20,4 +20,4 @@ function useStickyState(defaultValue, key) {
     return [value, setValue];
 }
 
-export default useStickyState;
+export default useLocalStorage;

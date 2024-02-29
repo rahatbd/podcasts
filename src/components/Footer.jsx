@@ -78,7 +78,7 @@ const StyledNewTabImg = styled.img`
 
 const StyledListenNotesDiv = styled.div`
     text-align: center;
-    margin-block-start: 1.5rem;
+    margin-block-start: var(--space);
 `;
 
 const StyledListenNotesA = styled.a`
@@ -90,13 +90,13 @@ const StyledListenNotesA = styled.a`
 
     &:focus-visible {
         outline: calc(2rem / 16) dashed;
-        outline-offset: 0.5rem;
+        outline-offset: 0.25rem;
         border-radius: 0.25rem;
     }
 `;
 
 const StyledListenNotesImg = styled.img`
-    inline-size: calc(300rem / 16);
+    inline-size: calc(250rem / 16);
     aspect-ratio: 10;
 `;
 

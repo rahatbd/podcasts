@@ -23,9 +23,11 @@ const appearance = {
 };
 
 const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
 
 function App() {
     const [theme, setTheme] = useState(darkMode.matches ? appearance.dark : appearance.light);
+    const [isReducedMotion, setIsReducedMotion] = useState(!reducedMotion.matches);
 
     useEffect(() => {
         const changeTheme = event => setTheme(event.matches ? appearance.dark : appearance.light);
@@ -33,11 +35,17 @@ function App() {
         return () => darkMode.removeEventListener('change', changeTheme);
     }, []);
 
+    useEffect(() => {
+        const changeReducedMotion = event => setIsReducedMotion(!event.matches);
+        reducedMotion.addEventListener('change', changeReducedMotion);
+        return () => reducedMotion.removeEventListener('change', changeReducedMotion);
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Header />
-            <Regions />
+            <Regions isReducedMotion={isReducedMotion} />
             <Footer />
         </ThemeProvider>
     );

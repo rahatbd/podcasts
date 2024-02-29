@@ -1,4 +1,3 @@
-import useFetch from '../hooks/useFetch';
 import Flag from 'react-world-flags';
 import styled from 'styled-components';
 
@@ -27,7 +26,7 @@ const StyledCentreDiv = styled.div`
 const StyledHeadingsDiv = styled(StyledCentreDiv)`
     text-align: center;
     text-wrap: balance;
-    min-block-size: calc(110rem / 16);
+    min-block-size: calc(125rem / 16);
 `;
 
 const StyledH2 = styled.h2`
@@ -76,53 +75,49 @@ const StyledFlagImg = styled(Flag)`
     inline-size: 1.25lh;
 `;
 
-function Podcasts({ options, region }) {
-    const getBestPodcasts = useFetch(`best_podcasts?region=${region}`);
-
+function Podcasts({ bestPodcasts, options }) {
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
     }
 
     function findRegion(country) {
-        const { region } = options.length && options.find(({ name }) => name === country);
+        const { region } = options.find(({ name }) => name === country);
         return region;
     }
 
     return (
         <StyledPodcastsDiv>
-            {getBestPodcasts?.podcasts.map(
-                ({ id, title, publisher, thumbnail, description, country }) => (
-                    <StyledArticle key={id}>
-                        <StyledHeadingsDiv>
-                            <StyledH2>{title}</StyledH2>
-                            <StyledH3>
-                                <StyledSpan>by</StyledSpan> {publisher}
-                            </StyledH3>
-                        </StyledHeadingsDiv>
-                        <StyledCentreDiv>
-                            <StyledPodcastImg
-                                src={thumbnail}
-                                alt={`${title} cover art`}
-                                width="300"
-                                height="300"
-                                loading="lazy"
-                            />
-                        </StyledCentreDiv>
-                        <StyledDescriptionDiv>
-                            <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
-                        </StyledDescriptionDiv>
-                        <StyledCountryP>
-                            Country: {country}{' '}
-                            <StyledFlagImg
-                                alt={`${country} flag`}
-                                code={findRegion(country)}
-                                width="24"
-                            />
-                        </StyledCountryP>
-                    </StyledArticle>
-                )
-            )}
+            {bestPodcasts.podcasts.map(({ id, title, publisher, thumbnail, description, country }) => (
+                <StyledArticle key={id}>
+                    <StyledHeadingsDiv>
+                        <StyledH2>{title}</StyledH2>
+                        <StyledH3>
+                            <StyledSpan>by</StyledSpan> {publisher}
+                        </StyledH3>
+                    </StyledHeadingsDiv>
+                    <StyledCentreDiv>
+                        <StyledPodcastImg
+                            alt={`${title} podcast thumbnail`}
+                            src={thumbnail}
+                            width={300}
+                            height={300}
+                            loading="lazy"
+                        />
+                    </StyledCentreDiv>
+                    <StyledDescriptionDiv>
+                        <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
+                    </StyledDescriptionDiv>
+                    <StyledCountryP>
+                        Country: {country}{' '}
+                        <StyledFlagImg
+                            alt={`${country} flag`}
+                            code={findRegion(country)}
+                            width={24}
+                        />
+                    </StyledCountryP>
+                </StyledArticle>
+            ))}
         </StyledPodcastsDiv>
     );
 }

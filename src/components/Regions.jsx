@@ -1,9 +1,33 @@
 import { useState, useEffect } from 'react';
 import { flexCentre } from '../GlobalStyle';
-import useStickyState from '../hooks/useStickyState';
+import { CircleLoader } from 'react-spinners';
+import styled, { useTheme } from 'styled-components';
+import useLocalStorage from '../hooks/useLocalStorage';
 import useFetch from '../hooks/useFetch';
 import Podcasts from './Podcasts';
-import styled from 'styled-components';
+
+const StyledLoadingDiv = styled.div`
+    display: grid;
+    place-items: center;
+    block-size: 100%;
+
+    &:empty {
+        display: none;
+    }
+`;
+
+const StyledFormDiv = styled.div`
+    position: relative;
+    margin-block: var(--space) 2rem;
+`;
+
+const StyledPodcastsLoadingDiv = styled.div`
+    display: grid;
+    justify-items: center;
+    position: absolute;
+    inset-block-start: -1.4rem;
+    inline-size: 100%;
+`;
 
 const StyledForm = styled.form`
     ${flexCentre}
@@ -13,7 +37,7 @@ const StyledForm = styled.form`
     flex-wrap: wrap;
     gap: var(--space);
     text-align: center; */
-    margin-block-end: var(--space);
+    /* margin-block-end: var(--space); */
 `;
 
 const StyledLabel = styled.label`
@@ -36,6 +60,10 @@ const StyledArrowDiv = styled.div`
         border-inline: var(--border-inline-size) solid transparent;
         pointer-events: none;
     }
+
+    &:has(select:disabled)::after {
+        border-block-start-color: GrayText;
+    }
 `;
 
 const StyledSelect = styled.select`
@@ -47,7 +75,6 @@ const StyledSelect = styled.select`
     font: inherit;
     font-size: 1.25rem;
     font-weight: 800;
-    min-inline-size: var(--inline-size);
     inline-size: max(var(--inline-size), 100%);
     cursor: pointer;
     padding: 0.5rem 1rem;
@@ -58,11 +85,23 @@ const StyledSelect = styled.select`
     }
 `;
 
-function Regions() {
+const StyledP = styled.p`
+    font-size: small;
+    font-style: italic;
+    font-weight: 250;
+    font-variation-settings: 'opsz' 25;
+    text-align: center;
+    margin-block-start: 0.5rem;
+`;
+
+function Regions({ isReducedMotion }) {
     const [options, setOptions] = useState([]);
-    // const [region, setRegion] = useState('ca');
-    const [region, setRegion] = useStickyState('ca', 'country');
-    const getRegions = useFetch('regions');
+    const [region, setRegion] = useLocalStorage('ca', 'country');
+    const { data: getRegions, isLoading: isRegionsLoading } = useFetch('regions');
+    const { data: getBestPodcasts, isLoading: isBestPodcastsLoading } = useFetch(
+        `best_podcasts?region=${region}`
+    );
+    const theme = useTheme();
 
     useEffect(() => {
         if (!getRegions) return;
@@ -80,34 +119,57 @@ function Regions() {
 
     return (
         <main className="wrapper">
-            <StyledForm>
-                <StyledLabel htmlFor="region">Top Podcasts:</StyledLabel>
-                <StyledArrowDiv>
-                    <StyledSelect
-                        id="region"
-                        value={region}
-                        onChange={event => setRegion(event.target.value)}
-                        autoComplete="on"
-                    >
-                        {options.map(({ name, region }) => (
-                            <option
-                                key={region}
-                                value={region}
-                            >
-                                {name}
-                            </option>
-                        ))}
-                    </StyledSelect>
-                </StyledArrowDiv>
-            </StyledForm>
-            {/* <p>
-                Please note that podcasts that are &quot;best&quot; in a country/region may not be
-                produced in that country/region.
-            </p> */}
-            <Podcasts
-                options={options}
-                region={region}
-            />
+            <StyledLoadingDiv>
+                <CircleLoader
+                    loading={isRegionsLoading}
+                    color={theme.textColour}
+                    size={150}
+                    speedMultiplier={isReducedMotion ? 0.25 : 1}
+                />
+            </StyledLoadingDiv>
+            {Boolean(options.length && getBestPodcasts?.podcasts.length) && (
+                <>
+                    <StyledFormDiv>
+                        <StyledPodcastsLoadingDiv>
+                            <CircleLoader
+                                loading={isBestPodcastsLoading}
+                                color={theme.textColour}
+                                size={15}
+                                speedMultiplier={isReducedMotion ? 0.25 : 1}
+                            />
+                        </StyledPodcastsLoadingDiv>
+                        <StyledForm>
+                            <StyledLabel htmlFor="region">Best Podcasts</StyledLabel>
+                            <StyledArrowDiv>
+                                <StyledSelect
+                                    autoComplete="on"
+                                    id="region"
+                                    value={region}
+                                    onChange={event => setRegion(event.target.value)}
+                                    disabled={isBestPodcastsLoading}
+                                >
+                                    {options.map(({ name, region }) => (
+                                        <option
+                                            key={region}
+                                            value={region}
+                                        >
+                                            {name}
+                                        </option>
+                                    ))}
+                                </StyledSelect>
+                            </StyledArrowDiv>
+                        </StyledForm>
+                        <StyledP>
+                            Please note that podcasts that are &quot;best&quot; in a country may not be
+                            produced in that country.
+                        </StyledP>
+                    </StyledFormDiv>
+                    <Podcasts
+                        bestPodcasts={getBestPodcasts}
+                        options={options}
+                    />
+                </>
+            )}
         </main>
     );
 }
