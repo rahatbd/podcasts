@@ -16,8 +16,6 @@ function useFetch(param) {
             try {
                 setIsLoading(true);
                 const response = await fetch(
-                    `${urlTest}/${param}`,
-                    { signal }
                     // `${urlBase}/${param}`,
                     // {
                     //     headers: {
@@ -25,6 +23,8 @@ function useFetch(param) {
                     //     },
                     //     signal,
                     // }
+                    `${urlTest}/${param}`,
+                    { signal }
                 );
                 if (!response.ok) throw Error(`Status: ${response.status} ${response.statusText}`);
                 const data = await response.json();
@@ -45,7 +45,7 @@ function useFetch(param) {
         return () => abortController.abort();
     }, [param]);
 
-    return { data, isLoading };
+    return [data, isLoading];
 }
 
 export default useFetch;

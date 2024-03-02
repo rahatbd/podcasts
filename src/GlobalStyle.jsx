@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 /*----------------------------------------------------------------------------------------------------------------------------*/
@@ -79,14 +79,6 @@ img {
 a {
     color: inherit;
 }
-`;
-
-export const flexCentre = css`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space);
-    text-align: center;
 `;
 
 export default GlobalStyle;

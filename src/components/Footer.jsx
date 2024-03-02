@@ -1,19 +1,14 @@
-import { flexCentre } from '../GlobalStyle';
 import styled, { useTheme } from 'styled-components';
 import newTabIcon from '../assets/new-tab.svg';
 import listenNotesBlack from '../assets/listen-notes-black.png';
 import listenNotesWhite from '../assets/listen-notes-white.png';
 
-// const StyledCopyrightLinksDiv = styled.div`
-//     display: flex;
-//     justify-content: center;
-//     flex-wrap: wrap;
-//     gap: var(--space);
-//     text-align: center;
-// `;
-
 const StyledCopyrightLinksDiv = styled.div`
-    ${flexCentre}
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space);
+    text-align: center;
 `;
 
 const StyledSmall = styled.small`
@@ -22,7 +17,6 @@ const StyledSmall = styled.small`
 `;
 
 const StyledUl = styled.ul`
-    /* flex */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

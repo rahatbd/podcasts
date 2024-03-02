@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { flexCentre } from '../GlobalStyle';
 import { CircleLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -10,10 +9,6 @@ const StyledLoadingDiv = styled.div`
     display: grid;
     place-items: center;
     block-size: 100%;
-
-    &:empty {
-        display: none;
-    }
 `;
 
 const StyledFormDiv = styled.div`
@@ -30,14 +25,12 @@ const StyledPodcastsLoadingDiv = styled.div`
 `;
 
 const StyledForm = styled.form`
-    ${flexCentre}
-    /* display: flex; */
+    display: flex;
+    justify-content: center;
     align-items: baseline;
-    /* justify-content: center;
     flex-wrap: wrap;
-    gap: var(--space);
-    text-align: center; */
-    /* margin-block-end: var(--space); */
+    gap: 0.5rem;
+    text-align: center;
 `;
 
 const StyledLabel = styled.label`
@@ -94,13 +87,11 @@ const StyledP = styled.p`
     margin-block-start: 0.5rem;
 `;
 
-function Regions({ isReducedMotion }) {
+function Main({ isReducedMotion }) {
     const [options, setOptions] = useState([]);
     const [region, setRegion] = useLocalStorage('ca', 'country');
-    const { data: getRegions, isLoading: isRegionsLoading } = useFetch('regions');
-    const { data: getBestPodcasts, isLoading: isBestPodcastsLoading } = useFetch(
-        `best_podcasts?region=${region}`
-    );
+    const [getRegions] = useFetch('regions');
+    const [getBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
     const theme = useTheme();
 
     useEffect(() => {
@@ -119,19 +110,22 @@ function Regions({ isReducedMotion }) {
 
     return (
         <main className="wrapper">
-            <StyledLoadingDiv>
-                <CircleLoader
-                    loading={isRegionsLoading}
-                    color={theme.textColour}
-                    size={150}
-                    speedMultiplier={isReducedMotion ? 0.25 : 1}
-                />
-            </StyledLoadingDiv>
+            {Boolean(!options.length || !getBestPodcasts?.podcasts.length) && (
+                <StyledLoadingDiv>
+                    <CircleLoader
+                        aria-label="loading"
+                        color={theme.textColour}
+                        size={150}
+                        speedMultiplier={isReducedMotion ? 0.25 : 1}
+                    />
+                </StyledLoadingDiv>
+            )}
             {Boolean(options.length && getBestPodcasts?.podcasts.length) && (
                 <>
                     <StyledFormDiv>
                         <StyledPodcastsLoadingDiv>
                             <CircleLoader
+                                aria-label="podcasts loading"
                                 loading={isBestPodcastsLoading}
                                 color={theme.textColour}
                                 size={15}
@@ -174,4 +168,4 @@ function Regions({ isReducedMotion }) {
     );
 }
 
-export default Regions;
+export default Main;

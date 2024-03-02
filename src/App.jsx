@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import Header from './components/Header';
-import Regions from './components/Regions';
+import Main from './components/Main';
 import Footer from './components/Footer';
 
 const appearance = {
@@ -45,7 +45,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Header />
-            <Regions isReducedMotion={isReducedMotion} />
+            <Main isReducedMotion={isReducedMotion} />
             <Footer />
         </ThemeProvider>
     );
