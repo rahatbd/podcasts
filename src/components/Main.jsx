@@ -3,6 +3,7 @@ import { CircleLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useFetch from '../hooks/useFetch';
+import Error from './Error';
 import Podcasts from './Podcasts';
 
 const StyledLoadingDiv = styled.div`
@@ -91,7 +92,7 @@ function Main({ isReducedMotion }) {
     const [options, setOptions] = useState([]);
     const [region, setRegion] = useLocalStorage('ca', 'country');
     const [getRegions] = useFetch('regions');
-    const [getBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
+    const [getBestPodcasts, errorBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
     const theme = useTheme();
 
     useEffect(() => {
@@ -110,58 +111,65 @@ function Main({ isReducedMotion }) {
 
     return (
         <main className="wrapper">
-            {Boolean(!options.length || !getBestPodcasts?.podcasts.length) && (
-                <StyledLoadingDiv>
-                    <CircleLoader
-                        aria-label="loading"
-                        color={theme.textColour}
-                        size={150}
-                        speedMultiplier={isReducedMotion ? 0.25 : 1}
-                    />
-                </StyledLoadingDiv>
-            )}
-            {Boolean(options.length && getBestPodcasts?.podcasts.length) && (
+            {errorBestPodcasts ? (
+                <Error error={errorBestPodcasts} />
+            ) : (
                 <>
-                    <StyledFormDiv>
-                        <StyledPodcastsLoadingDiv>
+                    {Boolean(!options.length || !getBestPodcasts?.podcasts.length) && (
+                        <StyledLoadingDiv>
                             <CircleLoader
-                                aria-label="podcasts loading"
-                                loading={isBestPodcastsLoading}
+                                aria-label="loading"
                                 color={theme.textColour}
-                                size={15}
+                                size={150}
                                 speedMultiplier={isReducedMotion ? 0.25 : 1}
                             />
-                        </StyledPodcastsLoadingDiv>
-                        <StyledForm>
-                            <StyledLabel htmlFor="region">Best Podcasts</StyledLabel>
-                            <StyledArrowDiv>
-                                <StyledSelect
-                                    autoComplete="on"
-                                    id="region"
-                                    value={region}
-                                    onChange={event => setRegion(event.target.value)}
-                                    disabled={isBestPodcastsLoading}
-                                >
-                                    {options.map(({ name, region }) => (
-                                        <option
-                                            key={region}
+                        </StyledLoadingDiv>
+                    )}
+                    {Boolean(options.length && getBestPodcasts?.podcasts.length) && (
+                        <>
+                            <StyledFormDiv>
+                                {isBestPodcastsLoading && (
+                                    <StyledPodcastsLoadingDiv>
+                                        <CircleLoader
+                                            aria-label="podcasts loading"
+                                            color={theme.textColour}
+                                            size={15}
+                                            speedMultiplier={isReducedMotion ? 0.25 : 1}
+                                        />
+                                    </StyledPodcastsLoadingDiv>
+                                )}
+                                <StyledForm>
+                                    <StyledLabel htmlFor="region">Best Podcasts</StyledLabel>
+                                    <StyledArrowDiv>
+                                        <StyledSelect
+                                            autoComplete="on"
+                                            id="region"
                                             value={region}
+                                            onChange={event => setRegion(event.target.value)}
+                                            disabled={isBestPodcastsLoading}
                                         >
-                                            {name}
-                                        </option>
-                                    ))}
-                                </StyledSelect>
-                            </StyledArrowDiv>
-                        </StyledForm>
-                        <StyledP>
-                            Please note that podcasts that are &quot;best&quot; in a country may not be
-                            produced in that country.
-                        </StyledP>
-                    </StyledFormDiv>
-                    <Podcasts
-                        bestPodcasts={getBestPodcasts}
-                        options={options}
-                    />
+                                            {options.map(({ name, region }) => (
+                                                <option
+                                                    key={region}
+                                                    value={region}
+                                                >
+                                                    {name}
+                                                </option>
+                                            ))}
+                                        </StyledSelect>
+                                    </StyledArrowDiv>
+                                </StyledForm>
+                                <StyledP>
+                                    Please note that podcasts that are &quot;best&quot; in a country may not be
+                                    produced in that country.
+                                </StyledP>
+                            </StyledFormDiv>
+                            <Podcasts
+                                bestPodcasts={getBestPodcasts}
+                                options={options}
+                            />
+                        </>
+                    )}
                 </>
             )}
         </main>

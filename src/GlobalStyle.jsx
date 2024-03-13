@@ -76,8 +76,17 @@ img {
     }
 }
 
+p {
+    text-wrap: pretty;
+}
+
 a {
     color: inherit;
+}
+
+::selection {
+    background-color: ${({ theme }) => theme.textColour};
+    color: ${({ theme }) => theme.backgroundColour};
 }
 `;
 

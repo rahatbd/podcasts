@@ -6,6 +6,7 @@ const urlTest = 'https://listen-api-test.listennotes.com/api/v2';
 
 function useFetch(param) {
     const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -30,22 +31,21 @@ function useFetch(param) {
                 const data = await response.json();
                 if (!data) throw Error('No data found!');
                 setData(data);
-                // setIsLoading(false);
+                setError(null);
             } catch (error) {
                 if (!signal.aborted) {
                     console.error(error);
-                    // render error UI
+                    setError(error.message);
                 }
             } finally {
                 setIsLoading(false);
-                // console.log('done');
             }
         })();
 
         return () => abortController.abort();
     }, [param]);
 
-    return [data, isLoading];
+    return [data, error, isLoading];
 }
 
 export default useFetch;

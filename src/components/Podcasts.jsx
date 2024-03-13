@@ -61,7 +61,6 @@ const StyledDescriptionP = styled.p`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
-    text-wrap: pretty;
     max-inline-size: 70ch;
 `;
 

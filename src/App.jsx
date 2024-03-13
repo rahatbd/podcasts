@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 
-const appearance = {
+const theme = {
     dark: {
         name: 'dark',
         accentColour: '#1a1a2e',
@@ -26,13 +26,13 @@ const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
 
 function App() {
-    const [theme, setTheme] = useState(darkMode.matches ? appearance.dark : appearance.light);
+    const [currentTheme, setCurrentTheme] = useState(darkMode.matches ? theme.dark : theme.light);
     const [isReducedMotion, setIsReducedMotion] = useState(!reducedMotion.matches);
 
     useEffect(() => {
-        const changeTheme = event => setTheme(event.matches ? appearance.dark : appearance.light);
-        darkMode.addEventListener('change', changeTheme);
-        return () => darkMode.removeEventListener('change', changeTheme);
+        const changeCurrentTheme = event => setCurrentTheme(event.matches ? theme.dark : theme.light);
+        darkMode.addEventListener('change', changeCurrentTheme);
+        return () => darkMode.removeEventListener('change', changeCurrentTheme);
     }, []);
 
     useEffect(() => {
@@ -42,7 +42,7 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={currentTheme}>
             <GlobalStyle />
             <Header />
             <Main isReducedMotion={isReducedMotion} />
