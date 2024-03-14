@@ -7,11 +7,9 @@ const StyledPodcastsDiv = styled.div`
     gap: var(--space);
 `;
 
-const StyledArticle = styled.article`
-    --border-inline-size: calc(1.5rem / 16);
-    border: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem ${({ theme }) => theme.accentColour};
+const StyledArticle = styled.article.attrs({
+    className: 'border',
+})`
     line-height: 1.5;
     contain: content;
 `;

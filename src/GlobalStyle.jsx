@@ -65,6 +65,13 @@ header, footer {
     grid-column: wrapper;
 }
 
+.border {
+    --border-inline-size: calc(1.5rem / 16);
+    border: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem ${({ theme }) => theme.accentColour};
+}
+
 img {
     max-inline-size: 100%;
     block-size: auto;
