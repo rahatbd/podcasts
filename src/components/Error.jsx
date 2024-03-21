@@ -15,7 +15,7 @@ const StyledHeadingDiv = styled.div`
     flex-wrap: wrap;
     column-gap: 0.5rem;
     border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
-    padding-block: var(--space);
+    padding: var(--space);
 `;
 
 const StyledImg = styled.img`
@@ -26,6 +26,7 @@ const StyledH2 = styled.h2`
     font-size: var(--inline-size);
     text-transform: uppercase;
     letter-spacing: calc(3rem / 16);
+    text-shadow: 0 0 calc(1rem / 16);
 `;
 
 const StyledMessageDiv = styled.div`
@@ -37,7 +38,7 @@ const StyledMessageDiv = styled.div`
 `;
 
 const StyledErrorP = styled.p`
-    font-style: italic;
+    font-size: 1.35rem;
     font-weight: 700;
     margin-block: 0.5rem;
 `;

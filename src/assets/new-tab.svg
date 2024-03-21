@@ -1,5 +1,11 @@
-<!-- https://www.svgrepo.com/svg/340719/new-tab -->
+<!--
+COLLECTION: Carbon Design Line Icons
+LICENSE: Apache License
+AUTHOR: Carbon Design
+LINK: https://www.svgrepo.com/svg/340719/new-tab
+-->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#fffbf5" width="16">
+    <title>New Tab</title>
     <style>
         @media (prefers-color-scheme: light) {
             svg {

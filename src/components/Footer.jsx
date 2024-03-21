@@ -25,18 +25,37 @@ const StyledUl = styled.ul`
 
 const StyledLi = styled.li`
     list-style-type: none;
-
-    &:first-child::after {
-        content: '|';
-        display: inline-block;
-        vertical-align: middle;
-        rotate: 15deg;
-        margin-inline-start: var(--space);
-    }
 `;
 
 const StyledLinksA = styled.a`
-    text-underline-offset: 0.25rem;
+    position: relative;
+    text-decoration-line: none;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-end: calc(-2rem / 16);
+        display: block;
+        inline-size: 100%;
+        block-size: calc(1rem / 16);
+        background-color: ${({ theme }) => theme.textColour};
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: transform 1.25s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+    }
+
+    &::before {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    &::after {
+        transform-origin: right;
+        transition-delay: 0.25s;
+    }
 
     &:visited {
         color: ${({ theme }) => theme.visitedColour};
@@ -44,15 +63,28 @@ const StyledLinksA = styled.a`
 
     /* @media (any-hover: hover) {} */
     &:hover {
-        text-decoration-style: wavy;
+        @media (prefers-reduced-motion: no-preference) {
+            &::before {
+                transform: scaleX(1);
+                transition-delay: 0.25s;
+            }
+
+            &::after {
+                transform: scaleX(0);
+                transition-delay: 0s;
+            }
+        }
     }
 
-    /* global */
     &:focus-visible {
-        outline: calc(2rem / 16) solid;
+        outline: calc(1rem / 16) solid;
         outline-offset: 0.25rem;
         border-radius: 0.25rem;
-        text-decoration-line: none;
+
+        &::before,
+        &::after {
+            display: none;
+        }
     }
 
     ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
@@ -66,8 +98,10 @@ const StyledLinksA = styled.a`
 `;
 
 const StyledNewTabImg = styled.img`
+    position: relative;
+    inset-block-end: calc(1rem / 16);
     inline-size: 0.75lh;
-    margin-inline-start: calc(var(--space) / 2);
+    margin-inline-start: 0.25rem;
 `;
 
 const StyledListenNotesDiv = styled.div`
@@ -90,7 +124,7 @@ const StyledListenNotesA = styled.a`
 `;
 
 const StyledListenNotesImg = styled.img`
-    inline-size: calc(250rem / 16);
+    inline-size: calc(175rem / 16);
     aspect-ratio: 10;
 `;
 
@@ -113,11 +147,11 @@ function Footer() {
                                 rel="noreferrer"
                             >
                                 GitHub
+                                <StyledNewTabImg
+                                    src={newTabIcon}
+                                    alt="new tab icon"
+                                />
                             </StyledLinksA>
-                            <StyledNewTabImg
-                                src={newTabIcon}
-                                alt="new tab icon"
-                            />
                         </StyledLi>
                     </StyledUl>
                 </StyledCopyrightLinksDiv>

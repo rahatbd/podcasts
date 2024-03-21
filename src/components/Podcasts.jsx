@@ -7,9 +7,7 @@ const StyledPodcastsDiv = styled.div`
     gap: var(--space);
 `;
 
-const StyledArticle = styled.article.attrs({
-    className: 'border',
-})`
+const StyledArticle = styled.article`
     line-height: 1.5;
     contain: content;
 `;
@@ -86,7 +84,10 @@ function Podcasts({ bestPodcasts, options }) {
     return (
         <StyledPodcastsDiv>
             {bestPodcasts.podcasts.map(({ id, title, publisher, thumbnail, description, country }) => (
-                <StyledArticle key={id}>
+                <StyledArticle
+                    className="border"
+                    key={id}
+                >
                     <StyledHeadingsDiv>
                         <StyledH2>{title}</StyledH2>
                         <StyledH3>

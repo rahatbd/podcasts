@@ -13,6 +13,9 @@ const StyledLoadingDiv = styled.div`
 `;
 
 const StyledFormDiv = styled.div`
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
     position: relative;
     margin-block: var(--space) 2rem;
 `;
@@ -71,7 +74,8 @@ const StyledSelect = styled.select`
     font-weight: 800;
     inline-size: max(var(--inline-size), 100%);
     cursor: pointer;
-    padding: 0.5rem 1rem;
+    padding-block: 0.5rem;
+    padding-inline: 1rem 2rem;
 
     &:focus {
         outline: calc(1rem / 16) solid;
@@ -79,13 +83,10 @@ const StyledSelect = styled.select`
     }
 `;
 
-const StyledP = styled.p`
-    font-size: small;
+const StyledSmall = styled.small`
     font-style: italic;
     font-weight: 250;
     font-variation-settings: 'opsz' 25;
-    text-align: center;
-    margin-block-start: 0.5rem;
 `;
 
 function Main({ isReducedMotion }) {
@@ -159,10 +160,10 @@ function Main({ isReducedMotion }) {
                                         </StyledSelect>
                                     </StyledArrowDiv>
                                 </StyledForm>
-                                <StyledP>
-                                    Please note that podcasts that are &quot;best&quot; in a country may not be
-                                    produced in that country.
-                                </StyledP>
+                                <StyledSmall>
+                                    Please note that podcasts that are &quot;best&quot; in a country may not be produced
+                                    in that country.
+                                </StyledSmall>
                             </StyledFormDiv>
                             <Podcasts
                                 bestPodcasts={getBestPodcasts}
