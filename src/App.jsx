@@ -8,17 +8,17 @@ import Footer from './components/Footer';
 const theme = {
     dark: {
         name: 'dark',
-        accentColour: '#1a1a2e',
-        backgroundColour: '#0f0f0f',
-        textColour: '#fffbf5',
-        visitedColour: '#b4b4b8',
+        accentColour: 'oklch(22.84% 0.038 282.93)',
+        backgroundColour: 'oklch(16.84% 0 0)',
+        textColour: 'oklch(98.95% 0.009 78.28)',
+        visitedColour: 'oklch(59.99% 0 0)',
     },
     light: {
         name: 'light',
-        accentColour: '#f7efe5',
-        backgroundColour: '#fffbf5',
-        textColour: '#0f0f0f',
-        visitedColour: '#643a6b',
+        accentColour: 'oklch(95.56% 0.016 73.68)',
+        backgroundColour: 'oklch(98.95% 0.009 78.28)',
+        textColour: 'oklch(16.84% 0 0)',
+        visitedColour: 'oklch(64.01% 0.155 294.18)',
     },
 };
 

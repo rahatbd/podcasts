@@ -89,6 +89,12 @@ p {
 
 a {
     color: inherit;
+
+    &:focus-visible {
+        outline: calc(1rem / 16) solid;
+        outline-offset: 0.25rem;
+        border-radius: 0.25rem;
+    }
 }
 
 ::selection {

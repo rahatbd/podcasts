@@ -13,10 +13,8 @@ const StyledLoadingDiv = styled.div`
 `;
 
 const StyledFormDiv = styled.div`
-    display: grid;
-    justify-items: center;
-    gap: 0.5rem;
     position: relative;
+    text-align: center;
     margin-block: var(--space) 2rem;
 `;
 
@@ -34,7 +32,7 @@ const StyledForm = styled.form`
     align-items: baseline;
     flex-wrap: wrap;
     gap: 0.5rem;
-    text-align: center;
+    margin-block-end: 0.25rem;
 `;
 
 const StyledLabel = styled.label`
