@@ -4,25 +4,28 @@ import styled from 'styled-components';
 const StyledPodcastsDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
-    gap: var(--space);
+    gap: var(--gap);
 `;
 
 const StyledArticle = styled.article`
-    line-height: 1.5;
     contain: content;
+    line-height: 1.5;
+    padding-inline: 1rem;
+
+    > div {
+        border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
+    }
 `;
 
 const StyledCentreDiv = styled.div`
-    display: grid;
-    place-content: center;
-    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
-    padding-inline: var(--space);
+    /* https://caniuse.com/mdn-css_properties_align-content_block_context */
+    align-content: center;
+    min-block-size: calc(125rem / 16);
 `;
 
 const StyledHeadingsDiv = styled(StyledCentreDiv)`
     text-align: center;
     text-wrap: balance;
-    min-block-size: calc(125rem / 16);
 `;
 
 const StyledH2 = styled.h2`
@@ -42,14 +45,14 @@ const StyledSpan = styled.span`
     font-variation-settings: 'opsz' 32;
 `;
 
+const StyledImageDiv = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
 const StyledPodcastImg = styled.img`
     inline-size: calc(300rem / 16);
     aspect-ratio: 1;
-`;
-
-const StyledDescriptionDiv = styled(StyledCentreDiv)`
-    min-block-size: calc(130rem / 16);
-    padding-block: var(--space);
 `;
 
 const StyledDescriptionP = styled.p`
@@ -63,14 +66,14 @@ const StyledDescriptionP = styled.p`
 const StyledCountryP = styled.p`
     font-weight: 300;
     text-align: center;
-    padding: calc(var(--space) / 2) var(--space);
+    padding-block: 0.5em;
 `;
 
 const StyledFlagImg = styled(Flag)`
     inline-size: 1.25lh;
 `;
 
-function Podcasts({ bestPodcasts, options }) {
+function Podcasts({ options, bestPodcasts }) {
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
@@ -94,18 +97,18 @@ function Podcasts({ bestPodcasts, options }) {
                             <StyledSpan>by</StyledSpan> {publisher}
                         </StyledH3>
                     </StyledHeadingsDiv>
-                    <StyledCentreDiv>
+                    <StyledImageDiv>
                         <StyledPodcastImg
-                            alt={`${title} podcast thumbnail`}
+                            alt={`"${title}" podcast artwork`}
                             src={thumbnail}
                             width={300}
                             height={300}
                             loading="lazy"
                         />
-                    </StyledCentreDiv>
-                    <StyledDescriptionDiv>
+                    </StyledImageDiv>
+                    <StyledCentreDiv>
                         <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
-                    </StyledDescriptionDiv>
+                    </StyledCentreDiv>
                     <StyledCountryP>
                         Country: {country}{' '}
                         <StyledFlagImg

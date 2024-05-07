@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledSection = styled.section`
     display: grid;
-    place-content: center;
+    place-items: center;
     block-size: 100%;
 `;
 
@@ -15,7 +15,7 @@ const StyledHeadingDiv = styled.div`
     flex-wrap: wrap;
     column-gap: 0.5rem;
     border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
-    padding: var(--space);
+    padding: 1rem;
 `;
 
 const StyledImg = styled.img`
@@ -34,7 +34,7 @@ const StyledMessageDiv = styled.div`
     font-weight: 200;
     line-height: 1.5;
     text-align: center;
-    padding: var(--space) 2rem;
+    padding: 1rem 2rem;
 `;
 
 const StyledErrorP = styled.p`
@@ -49,8 +49,8 @@ function Error({ error }) {
             <div className="border">
                 <StyledHeadingDiv>
                     <StyledImg
-                        src={errorIcon}
                         alt="error icon"
+                        src={errorIcon}
                     />
                     <StyledH2 id="error-heading">Error</StyledH2>
                 </StyledHeadingDiv>

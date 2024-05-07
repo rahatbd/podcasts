@@ -10,19 +10,20 @@ const StyledLoadingDiv = styled.div`
     display: grid;
     place-items: center;
     block-size: 100%;
+    cursor: progress;
 `;
 
 const StyledFormDiv = styled.div`
     position: relative;
     text-align: center;
-    margin-block: var(--space) 2rem;
+    margin-block: 1rem 2rem;
 `;
 
 const StyledPodcastsLoadingDiv = styled.div`
-    display: grid;
-    justify-items: center;
     position: absolute;
-    inset-block-start: -1.4rem;
+    inset-block-start: -1.5rem;
+    display: flex;
+    justify-content: center;
     inline-size: 100%;
 `;
 
@@ -62,7 +63,6 @@ const StyledArrowDiv = styled.div`
 `;
 
 const StyledSelect = styled.select`
-    --inline-size: 250px;
     appearance: none;
     background-color: ${({ theme }) => theme.accentColour};
     border: none;
@@ -70,19 +70,22 @@ const StyledSelect = styled.select`
     font: inherit;
     font-size: 1.25rem;
     font-weight: 800;
-    inline-size: max(var(--inline-size), 100%);
+    inline-size: max(250px, 100%);
     cursor: pointer;
-    padding-block: 0.5rem;
-    padding-inline: 1rem 2rem;
+    padding-block: 0.5em;
+    padding-inline: 1em 2em;
 
     &:focus {
         outline: calc(1rem / 16) solid;
         filter: drop-shadow(0 0 calc(1rem / 16));
     }
+
+    &:disabled {
+        cursor: progress;
+    }
 `;
 
 const StyledSmall = styled.small`
-    font-style: italic;
     font-weight: 250;
     font-variation-settings: 'opsz' 25;
 `;
@@ -90,7 +93,7 @@ const StyledSmall = styled.small`
 function Main({ isReducedMotion }) {
     const [options, setOptions] = useState([]);
     const [region, setRegion] = useLocalStorage('ca', 'country');
-    const [getRegions] = useFetch('regions');
+    const [getRegions, errorRegions] = useFetch('regions');
     const [getBestPodcasts, errorBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
     const theme = useTheme();
 
@@ -110,8 +113,8 @@ function Main({ isReducedMotion }) {
 
     return (
         <main className="wrapper">
-            {errorBestPodcasts ? (
-                <Error error={errorBestPodcasts} />
+            {errorRegions || errorBestPodcasts ? (
+                <Error error={errorRegions || errorBestPodcasts} />
             ) : (
                 <>
                     {Boolean(!options.length || !getBestPodcasts?.podcasts.length) && (
@@ -119,7 +122,7 @@ function Main({ isReducedMotion }) {
                             <CircleLoader
                                 aria-label="loading"
                                 color={theme.textColour}
-                                size={150}
+                                size="12rem"
                                 speedMultiplier={isReducedMotion ? 0.25 : 1}
                             />
                         </StyledLoadingDiv>
@@ -132,7 +135,7 @@ function Main({ isReducedMotion }) {
                                         <CircleLoader
                                             aria-label="podcasts loading"
                                             color={theme.textColour}
-                                            size={15}
+                                            size="1rem"
                                             speedMultiplier={isReducedMotion ? 0.25 : 1}
                                         />
                                     </StyledPodcastsLoadingDiv>
@@ -164,8 +167,8 @@ function Main({ isReducedMotion }) {
                                 </StyledSmall>
                             </StyledFormDiv>
                             <Podcasts
-                                bestPodcasts={getBestPodcasts}
                                 options={options}
+                                bestPodcasts={getBestPodcasts}
                             />
                         </>
                     )}

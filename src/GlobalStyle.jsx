@@ -23,17 +23,17 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 
 @font-face {
     font-family: Inter;
+    font-display: swap;
     font-style: normal;
     font-weight: 100 900;
-    font-display: swap;
     src: url(InterVariable-v4.woff2) format(woff2) tech(variations);
 }
 
 @font-face {
     font-family: Inter;
+    font-display: swap;
     font-style: italic;
     font-weight: 100 900;
-    font-display: swap;
     src: url(InterVariableItalic-v4.woff2) format(woff2) tech(variations);
 }
 
@@ -45,11 +45,11 @@ body {
 }
 
 #root {
-    --space: 1rem;
+    --gap: 1rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(1250px, 100% - 2 * var(--space)) [wrapper-end] 1fr [full-width-end];
-    gap: var(--space);
+    grid-template-columns: [full-width-start] 1fr [wrapper-start] min(1250px, 100% - 2 * var(--gap)) [wrapper-end] 1fr [full-width-end];
+    gap: var(--gap);
     min-block-size: 100svb;
 }
 
@@ -58,7 +58,7 @@ header, footer {
     grid-template-columns: subgrid;
     grid-column: full-width;
     background-color: ${({ theme }) => theme.accentColour};
-    padding-block: var(--space);
+    padding-block: 1rem;
 }
 
 .wrapper {
@@ -83,10 +83,6 @@ img {
     }
 }
 
-p {
-    text-wrap: pretty;
-}
-
 a {
     color: inherit;
 
@@ -95,6 +91,10 @@ a {
         outline-offset: 0.25rem;
         border-radius: 0.25rem;
     }
+}
+
+p {
+    text-wrap: pretty;
 }
 
 ::selection {

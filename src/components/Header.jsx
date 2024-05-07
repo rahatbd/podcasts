@@ -9,15 +9,9 @@ const StyledH1 = styled.h1`
     text-align: center;
     text-shadow: var(--text-shadow);
     text-transform: uppercase;
-    /* https://caniuse.com/?search=overflow-inline */
+    /* https://caniuse.com/mdn-css_properties_overflow-inline */
     overflow-x: auto;
     overflow-inline: auto;
-
-    /* https://www.youtube.com/watch?v=-5CY-7nAeSI */
-    /* https://caniuse.com/?search=overflow-inline */
-    /* @supports not (overflow-inline: auto) {
-        overflow-x: auto;
-    } */
 
     @media (prefers-reduced-motion: no-preference) {
         animation: worm 8s linear infinite alternate;

@@ -2,23 +2,16 @@ import styled, { useTheme } from 'styled-components';
 import listenNotesBlack from '../assets/listen-notes-black.png';
 import listenNotesWhite from '../assets/listen-notes-white.png';
 
-const StyledCopyrightLinksDiv = styled.div`
+const StyledCentreDiv = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: var(--space);
-    text-align: center;
+    gap: var(--gap);
 `;
 
 const StyledP = styled.p`
     font-weight: 350;
-`;
-
-const StyledUl = styled.ul`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space);
+    text-align: center;
 `;
 
 const StyledLi = styled.li`
@@ -78,39 +71,29 @@ const StyledLinksA = styled.a`
         }
     }
 
-    &:focus-visible {
+    &:focus-visible,
+    ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
+    ${StyledLi}:has(+ ${StyledLi} &:where(:hover, :focus-visible)) & {
         &::before,
         &::after {
             content: none;
         }
     }
 
-    ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
-    ${StyledLi}:has(+ ${StyledLi} &:where(:hover, :focus-visible)) & {
-        opacity: 0.65;
-    }
-
     &:active {
-        color: ActiveText;
         font-style: italic;
-
-        &::before,
-        &::after {
-            background-color: ActiveText;
-        }
     }
 `;
 
 const StyledSvg = styled.svg`
-    position: relative;
-    inset-block-end: calc(-1rem / 16);
     inline-size: 0.75lh;
+    transform: translateY(calc(1.5rem / 16));
     margin-inline-start: 0.25rem;
 `;
 
 const StyledListenNotesDiv = styled.div`
     text-align: center;
-    margin-block-start: var(--space);
+    margin-block-start: 1rem;
 `;
 
 const StyledListenNotesA = styled.a`
@@ -127,14 +110,12 @@ const StyledListenNotesImg = styled.img`
 `;
 
 function Footer() {
-    const theme = useTheme();
-
     return (
         <footer>
             <div className="wrapper">
-                <StyledCopyrightLinksDiv>
+                <StyledCentreDiv>
                     <StyledP>&copy; Rahat Rahman 2024</StyledP>
-                    <StyledUl>
+                    <StyledCentreDiv as="ul">
                         <StyledLi>
                             <StyledLinksA href="/">Portfolio</StyledLinksA>
                         </StyledLi>
@@ -162,8 +143,8 @@ function Footer() {
                                 </StyledSvg>
                             </StyledLinksA>
                         </StyledLi>
-                    </StyledUl>
-                </StyledCopyrightLinksDiv>
+                    </StyledCentreDiv>
+                </StyledCentreDiv>
                 <StyledListenNotesDiv>
                     <StyledListenNotesA
                         aria-label="Listen Notes API"
@@ -172,8 +153,8 @@ function Footer() {
                         rel="noreferrer"
                     >
                         <StyledListenNotesImg
-                            src={theme.name === 'dark' ? listenNotesWhite : listenNotesBlack}
                             alt="powered by LISTEN NOTES"
+                            src={useTheme().name === 'dark' ? listenNotesWhite : listenNotesBlack}
                         />
                     </StyledListenNotesA>
                 </StyledListenNotesDiv>
