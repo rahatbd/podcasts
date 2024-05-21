@@ -1,6 +1,6 @@
-import styled, { useTheme } from 'styled-components';
 import listenNotesBlack from '../assets/listen-notes-black.png';
 import listenNotesWhite from '../assets/listen-notes-white.png';
+import styled from 'styled-components';
 
 const StyledCentreDiv = styled.div`
     display: flex;
@@ -19,6 +19,7 @@ const StyledLi = styled.li`
 `;
 
 const StyledLinksA = styled.a`
+    /* https://fullystacked.net/color-mix-and-relative-color/ */
     --visited-colour: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
     position: relative;
     text-decoration-line: none;
@@ -159,10 +160,16 @@ function Footer() {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <StyledListenNotesImg
-                            alt="powered by LISTEN NOTES"
-                            src={useTheme().name === 'dark' ? listenNotesWhite : listenNotesBlack}
-                        />
+                        <picture>
+                            <source
+                                srcSet={listenNotesBlack}
+                                media="(prefers-color-scheme: light)"
+                            />
+                            <StyledListenNotesImg
+                                alt="powered by LISTEN NOTES"
+                                src={listenNotesWhite}
+                            />
+                        </picture>
                     </StyledListenNotesA>
                 </StyledListenNotesDiv>
             </div>

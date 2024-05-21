@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { CircleLoader } from 'react-spinners';
-import styled, { useTheme } from 'styled-components';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useFetch from '../hooks/useFetch';
 import Error from './Error';
 import Podcasts from './Podcasts';
+import styled from 'styled-components';
 
 const StyledLoadingDiv = styled.div`
     display: grid;
@@ -43,17 +43,20 @@ const StyledLabel = styled.label`
 `;
 
 const StyledArrowDiv = styled.div`
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
 
     &::after {
-        --border-inline-size: calc(7rem / 16);
+        --border-inline-size: 0.5rem;
+        --border-radius: 0.25rem;
         content: '';
         position: absolute;
         inset-inline-end: 5%;
         border-block-start: var(--border-inline-size) solid;
         border-inline: var(--border-inline-size) solid transparent;
+        border-start-start-radius: var(--border-radius);
+        border-start-end-radius: var(--border-radius);
         pointer-events: none;
     }
 
@@ -95,7 +98,6 @@ function Main({ isReducedMotion }) {
     const [region, setRegion] = useLocalStorage('country', 'ca');
     const [getRegions, errorRegions] = useFetch('regions');
     const [getBestPodcasts, errorBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
-    const theme = useTheme();
 
     useEffect(() => {
         if (!getRegions) return;
@@ -121,7 +123,7 @@ function Main({ isReducedMotion }) {
                         <StyledLoadingDiv>
                             <CircleLoader
                                 aria-label="loading"
-                                color={theme.textColour}
+                                color="currentcolor"
                                 size="12rem"
                                 speedMultiplier={isReducedMotion ? 0.25 : 1}
                             />
@@ -134,7 +136,7 @@ function Main({ isReducedMotion }) {
                                     <StyledPodcastsLoadingDiv>
                                         <CircleLoader
                                             aria-label="podcasts loading"
-                                            color={theme.textColour}
+                                            color="currentcolor"
                                             size="1rem"
                                             speedMultiplier={isReducedMotion ? 0.25 : 1}
                                         />
