@@ -1,15 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-ca">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Discover best podcasts.">
     <meta name="color-scheme" content="dark light">
-    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="theme-color" content="oklch(22.84% 0.038 282.93)" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="oklch(95.56% 0.016 73.68)" media="(prefers-color-scheme: light)">
+    <link href="podcast.ico" rel="icon" sizes="32x32">
+    <link href="icons/podcast.svg" rel="icon" type="image/svg+xml">
+    <link href="icons/podcast-180.png" rel="apple-touch-icon">
+    <link href="app.webmanifest" rel="manifest">
+    <link href="noscript.css" rel="stylesheet" media="(scripting: none)">
+    <script src="src/index.jsx" type="module"></script>
     <title>Podcasts</title>
 </head>
 
 <body>
+    <noscript>
+        <span>JavaScript disabled!</span>
+        <a href="https://www.enable-javascript.com" target="_blank" rel="noreferrer">Enable JavaScript
+            <!--
+            Author: Carbon Design
+            Collection: Carbon Design Line Icons
+            License: Apache License
+            Link: https://www.svgrepo.com/svg/340719/new-tab
+            -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-labelledby="title" role="img" fill="currentColor" 
+                 width="0.75lh">
+                <title id="title">New Tab</title>
+                <g>
+                    <path d="M26,26H6V6H16V4H6A2.002,2.002,0,0,0,4,6V26a2.002,2.002,0,0,0,2,2H26a2.002,2.002,0,0,0,2-2V16H26Z" />
+                    <path d="M26,26H6V6H16V4H6A2.002,2.002,0,0,0,4,6V26a2.002,2.002,0,0,0,2,2H26a2.002,2.002,0,0,0,2-2V16H26Z" />
+                </g>
+                <polygon points="26 6 26 2 24 2 24 6 20 6 20 8 24 8 24 12 26 12 26 8 30 8 30 6 26 6" />
+            </svg>
+        </a>
+    </noscript>
+    <!-- React App -->
     <div id="root"></div>
-    <script type="module" src="src/index.jsx"></script>
 </body>
 </html>

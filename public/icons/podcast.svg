@@ -1,0 +1,25 @@
+<!--
+Author: Mary Akveo
+Collection: Variety Flat Bordered Icons
+License: PD License
+Link: https://www.svgrepo.com/svg/469514/podcast-2
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <title>Podcast</title>
+    <style>
+        @media (prefers-color-scheme: light) {
+            line,
+            path {
+                stroke: oklch(16.84% 0 0);
+            }
+        }
+    </style>
+    <line fill="none" stroke="oklch(98.95% 0.009 78.28)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          x1="12" y1="13" x2="12" y2="21" />
+    <path fill="none" stroke="oklch(98.95% 0.009 78.28)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5.64,18.36a9,9,0,1,1,12.72,0" />
+    <path fill="none" stroke="oklch(98.95% 0.009 78.28)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15.54,15.54a5,5,0,1,0-7.08,0" />
+    <line fill="none" stroke="oklch(98.95% 0.009 78.28)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+          x1="11.95" y1="12" x2="12.05" y2="12" />
+</svg>

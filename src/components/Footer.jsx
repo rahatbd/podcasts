@@ -19,6 +19,7 @@ const StyledLi = styled.li`
 `;
 
 const StyledLinksA = styled.a`
+    --visited-colour: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
     position: relative;
     text-decoration-line: none;
 
@@ -50,11 +51,11 @@ const StyledLinksA = styled.a`
     }
 
     &:visited {
-        color: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
+        color: var(--visited-colour);
 
         &::before,
         &::after {
-            background-color: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
+            background-color: var(--visited-colour);
         }
     }
 
@@ -126,15 +127,21 @@ function Footer() {
                                 rel="noreferrer"
                             >
                                 GitHub
+                                {/*
+                                Author: Carbon Design
+                                Collection: Carbon Design Line Icons
+                                License: Apache License
+                                Link: https://www.svgrepo.com/svg/340719/new-tab
+                                */}
                                 <StyledSvg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 32 32"
-                                    aria-label="open in a new tab"
+                                    aria-labelledby="title"
                                     role="img"
                                     fill="currentColor"
-                                    width={16}
+                                    width="0.75lh"
                                 >
-                                    <title>New Tab</title>
+                                    <title id="title">New Tab</title>
                                     <g>
                                         <path d="M26,26H6V6H16V4H6A2.002,2.002,0,0,0,4,6V26a2.002,2.002,0,0,0,2,2H26a2.002,2.002,0,0,0,2-2V16H26Z" />
                                         <path d="M26,26H6V6H16V4H6A2.002,2.002,0,0,0,4,6V26a2.002,2.002,0,0,0,2,2H26a2.002,2.002,0,0,0,2-2V16H26Z" />

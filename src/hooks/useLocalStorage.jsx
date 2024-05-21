@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 /**
  * Persisting React State in localStorage
  * @link https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage
- * @param {string} defaultValue default value
- * @param {string} key          localStorage key name
- * @returns {string, function}  localStorage or default value and setter function
+ * @param {string}             key          localStorage key
+ * @param {string}             defaultValue default value
+ * @returns {string, function}              default or localStorage value and value setter function
  */
-function useLocalStorage(defaultValue, key) {
+function useLocalStorage(key, defaultValue) {
     const [value, setValue] = useState(() => {
         const localStorageValue = window.localStorage.getItem(key);
-        return localStorageValue !== null ? JSON.parse(localStorageValue) : defaultValue;
+        return localStorageValue === null ? defaultValue : JSON.parse(localStorageValue);
     });
 
     useEffect(() => {

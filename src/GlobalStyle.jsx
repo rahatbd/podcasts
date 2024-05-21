@@ -18,7 +18,7 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 @font-face {
     font-family: Decovar;
     font-display: swap;
-    src: url(Decovar.woff2) format(woff2) tech(variations);
+    src: url("fonts/Decovar.woff2") format(woff2) tech(variations);
 }
 
 @font-face {
@@ -26,7 +26,7 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     font-display: swap;
     font-style: normal;
     font-weight: 100 900;
-    src: url(InterVariable-v4.woff2) format(woff2) tech(variations);
+    src: url("fonts/InterVariable-v4.woff2") format(woff2) tech(variations);
 }
 
 @font-face {
@@ -34,7 +34,7 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     font-display: swap;
     font-style: italic;
     font-weight: 100 900;
-    src: url(InterVariableItalic-v4.woff2) format(woff2) tech(variations);
+    src: url("fonts/InterVariableItalic-v4.woff2") format(woff2) tech(variations);
 }
 
 body {
@@ -53,12 +53,17 @@ body {
     min-block-size: 100svb;
 }
 
-header, footer {
+header,
+footer {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: full-width;
     background-color: ${({ theme }) => theme.accentColour};
     padding-block: 1rem;
+
+    /* @media print {
+        display: none;
+    } */
 }
 
 .wrapper {
@@ -85,6 +90,7 @@ img {
 
 a {
     color: inherit;
+    user-select: none;
 
     &:focus-visible {
         outline: calc(1rem / 16) solid;

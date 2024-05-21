@@ -92,7 +92,7 @@ const StyledSmall = styled.small`
 
 function Main({ isReducedMotion }) {
     const [options, setOptions] = useState([]);
-    const [region, setRegion] = useLocalStorage('ca', 'country');
+    const [region, setRegion] = useLocalStorage('country', 'ca');
     const [getRegions, errorRegions] = useFetch('regions');
     const [getBestPodcasts, errorBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
     const theme = useTheme();
