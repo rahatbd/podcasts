@@ -19,7 +19,6 @@ const StyledLi = styled.li`
 `;
 
 const StyledLinksA = styled.a`
-    /* https://fullystacked.net/color-mix-and-relative-color/ */
     --visited-colour: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
     position: relative;
     text-decoration-line: none;
@@ -107,7 +106,7 @@ const StyledListenNotesA = styled.a`
 `;
 
 const StyledListenNotesImg = styled.img`
-    inline-size: calc(175rem / 16);
+    inline-size: calc(250rem / 16);
     aspect-ratio: 10;
 `;
 
@@ -168,6 +167,8 @@ function Footer() {
                             <StyledListenNotesImg
                                 alt="powered by LISTEN NOTES"
                                 src={listenNotesWhite}
+                                width={250}
+                                loading="lazy"
                             />
                         </picture>
                     </StyledListenNotesA>

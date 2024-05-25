@@ -18,7 +18,6 @@ const StyledArticle = styled.article`
 `;
 
 const StyledCentreDiv = styled.div`
-    /* https://caniuse.com/mdn-css_properties_align-content_block_context */
     align-content: center;
     min-block-size: calc(125rem / 16);
 `;
@@ -114,7 +113,8 @@ function Podcasts({ options, bestPodcasts }) {
                         <StyledFlagImg
                             alt={`${country} flag`}
                             code={findRegion(country)}
-                            width={24}
+                            width={30}
+                            loading="lazy"
                         />
                     </StyledCountryP>
                 </StyledArticle>

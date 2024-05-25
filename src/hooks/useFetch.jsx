@@ -20,7 +20,7 @@ function useFetch(param) {
                     // `${urlBase}/${param}`,
                     // {
                     //     headers: {
-                    //         'X-ListenAPI-Key': `${key}`,
+                    //         'X-ListenAPI-Key': import.meta.env.VITE_API_KEY,
                     //     },
                     //     signal,
                     // }
@@ -35,7 +35,7 @@ function useFetch(param) {
             } catch (error) {
                 if (!signal.aborted) {
                     console.error(error);
-                    setError(error.message);
+                    setError(error.message || 'An unexpected error occurred while fetching data.');
                 }
             } finally {
                 setIsLoading(false);

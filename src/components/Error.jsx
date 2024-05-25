@@ -55,7 +55,7 @@ function Error({ error }) {
                     <StyledH2 id="error-heading">Error</StyledH2>
                 </StyledHeadingDiv>
                 <StyledMessageDiv>
-                    <p>An unexpected error occurred while processing your request.</p>
+                    <p>Whoops! Something didn&apos;t go as planned! 😬</p>
                     {error.includes('400') && <StyledErrorP>Missing required parameters.</StyledErrorP>}
                     {error.includes('401') && <StyledErrorP>Wrong API key.</StyledErrorP>}
                     {error.includes('404') && <StyledErrorP>Endpoint, podcast or episode do not exist.</StyledErrorP>}
