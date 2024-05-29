@@ -59,7 +59,6 @@ footer {
     grid-template-columns: subgrid;
     grid-column: full-width;
     background-color: ${({ theme }) => theme.accentColour};
-    padding-block: 1rem;
 
     /* @media print {
         display: none;

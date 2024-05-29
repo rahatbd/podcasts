@@ -2,6 +2,12 @@ import listenNotesBlack from '../assets/listen-notes-black.png';
 import listenNotesWhite from '../assets/listen-notes-white.png';
 import styled from 'styled-components';
 
+const StyledFooter = styled.footer`
+    mask: radial-gradient(2.24rem at 50% 3rem, #000 99%, #0000 101%) calc(50% - 2rem) 0/4rem 100%,
+          radial-gradient(2.24rem at 50% -2rem, #0000 99%, #000 101%) 50% 1rem/4rem 100% repeat-x;
+    padding-block: 2rem 1rem;
+`;
+
 const StyledCentreDiv = styled.div`
     display: flex;
     justify-content: center;
@@ -22,6 +28,7 @@ const StyledLinksA = styled.a`
     --visited-colour: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
     position: relative;
     text-decoration-line: none;
+    white-space: nowrap;
 
     &::before,
     &::after {
@@ -112,7 +119,7 @@ const StyledListenNotesImg = styled.img`
 
 function Footer() {
     return (
-        <footer>
+        <StyledFooter>
             <div className="wrapper">
                 <StyledCentreDiv>
                     <StyledP>&copy; Rahat Rahman 2024</StyledP>
@@ -174,7 +181,7 @@ function Footer() {
                     </StyledListenNotesA>
                 </StyledListenNotesDiv>
             </div>
-        </footer>
+        </StyledFooter>
     );
 }
 

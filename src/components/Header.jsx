@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+const StyledHeader = styled.header`
+    mask: radial-gradient(2.24rem at 50% calc(100% - 3rem), #000 99%, #0000 101%) calc(50% - 2rem) 0/4rem 100%,
+          radial-gradient(2.24rem at 50% calc(100% + 2rem), #0000 99%, #000 101%) 50% calc(100% - 1rem) / 4rem 100% repeat-x;
+    padding-block: 1rem 2rem;
+`;
+
 const StyledH1 = styled.h1`
     --text-shadow: 0 0 calc(2rem / 16);
     font-family: Decovar, Inter, ui-sans-serif, system-ui, sans-serif;
@@ -31,11 +37,11 @@ const StyledH1 = styled.h1`
 
 function Header() {
     return (
-        <header>
+        <StyledHeader>
             <div className="wrapper">
                 <StyledH1>Podcasts</StyledH1>
             </div>
-        </header>
+        </StyledHeader>
     );
 }
 

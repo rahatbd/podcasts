@@ -16,7 +16,7 @@ const StyledLoadingDiv = styled.div`
 const StyledFormDiv = styled.div`
     position: relative;
     text-align: center;
-    margin-block: 1rem 2rem;
+    margin-block-end: 2rem;
 `;
 
 const StyledPodcastsLoadingDiv = styled.div`
@@ -47,9 +47,19 @@ const StyledArrowDiv = styled.div`
     display: flex;
     align-items: center;
 
+    &::before {
+        content: '\\00a0';
+        position: absolute;
+        inset-inline-end: 15%;
+        border-inline-start: calc(1rem / 16) solid;
+        opacity: 0.5;
+        z-index: 1;
+        pointer-events: none;
+    }
+
     &::after {
         --border-inline-size: 0.5rem;
-        --border-radius: 0.25rem;
+        --border-radius: 0.125rem;
         content: '';
         position: absolute;
         inset-inline-end: 5%;
@@ -75,8 +85,8 @@ const StyledSelect = styled.select`
     font-weight: 800;
     inline-size: max(250px, 100%);
     cursor: pointer;
-    padding-block: 0.5em;
-    padding-inline: 1em 2em;
+    padding-block: 0.5rem;
+    padding-inline: 1rem 4rem;
 
     &:focus {
         outline: calc(1rem / 16) solid;
@@ -164,8 +174,7 @@ function Main({ isReducedMotion }) {
                                     </StyledArrowDiv>
                                 </StyledForm>
                                 <StyledSmall>
-                                    Please note that podcasts that are &quot;best&quot; in a country may not be produced
-                                    in that country.
+                                    Please note that podcasts that are &quot;best&quot; in a country may not be produced in that country.
                                 </StyledSmall>
                             </StyledFormDiv>
                             <Podcasts
