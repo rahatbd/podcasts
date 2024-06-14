@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { CircleLoader } from 'react-spinners';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useFetch from '../hooks/useFetch';
 import Error from './Error';
+import Loading from './Loading';
 import Podcasts from './Podcasts';
 import styled from 'styled-components';
 
@@ -10,7 +10,6 @@ const StyledLoadingDiv = styled.div`
     display: grid;
     place-items: center;
     block-size: 100%;
-    cursor: progress;
 `;
 
 const StyledFormDiv = styled.div`
@@ -51,8 +50,7 @@ const StyledArrowDiv = styled.div`
         content: '\\00a0';
         position: absolute;
         inset-inline-end: 15%;
-        border-inline-start: calc(1rem / 16) solid;
-        opacity: 0.5;
+        border-inline-start: calc(1rem / 16) solid GrayText;
         z-index: 1;
         pointer-events: none;
     }
@@ -77,7 +75,7 @@ const StyledArrowDiv = styled.div`
 
 const StyledSelect = styled.select`
     appearance: none;
-    background-color: ${({ theme }) => theme.accentColour};
+    background-color: light-dark(var(--light-colour-accent), var(--dark-colour-accent));
     border: none;
     border-radius: 0.5rem;
     font: inherit;
@@ -92,10 +90,6 @@ const StyledSelect = styled.select`
         outline: calc(1rem / 16) solid;
         filter: drop-shadow(0 0 calc(1rem / 16));
     }
-
-    &:disabled {
-        cursor: progress;
-    }
 `;
 
 const StyledSmall = styled.small`
@@ -103,7 +97,7 @@ const StyledSmall = styled.small`
     font-variation-settings: 'opsz' 25;
 `;
 
-function Main({ isReducedMotion }) {
+function Main() {
     const [options, setOptions] = useState([]);
     const [region, setRegion] = useLocalStorage('country', 'ca');
     const [getRegions, errorRegions] = useFetch('regions');
@@ -131,12 +125,7 @@ function Main({ isReducedMotion }) {
                 <>
                     {Boolean(!options.length || !getBestPodcasts?.podcasts.length) && (
                         <StyledLoadingDiv>
-                            <CircleLoader
-                                aria-label="loading"
-                                color="currentcolor"
-                                size="12rem"
-                                speedMultiplier={isReducedMotion ? 0.25 : 1}
-                            />
+                            <Loading size={225} />
                         </StyledLoadingDiv>
                     )}
                     {Boolean(options.length && getBestPodcasts?.podcasts.length) && (
@@ -144,12 +133,7 @@ function Main({ isReducedMotion }) {
                             <StyledFormDiv>
                                 {isBestPodcastsLoading && (
                                     <StyledPodcastsLoadingDiv>
-                                        <CircleLoader
-                                            aria-label="podcasts loading"
-                                            color="currentcolor"
-                                            size="1rem"
-                                            speedMultiplier={isReducedMotion ? 0.25 : 1}
-                                        />
+                                        <Loading size="1rem" />
                                     </StyledPodcastsLoadingDiv>
                                 )}
                                 <StyledForm>

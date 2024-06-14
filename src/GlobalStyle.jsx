@@ -37,15 +37,28 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     src: url("fonts/InterVariableItalic-v4.woff2") format(woff2) tech(variations);
 }
 
+html {
+    --dark-colour: oklch(16.84% 0 0);
+    --dark-colour-accent: oklch(22.84% 0.038 282.93);
+    --dark-colour-visited: oklch(59.99% 0 0);
+    --light-colour: oklch(98.95% 0.009 78.28);
+    --light-colour-accent: oklch(95.56% 0.016 73.68);
+    --light-colour-visited: oklch(64.01% 0.155 294.18);
+    --gap: 1rem;
+}
+
 body {
     font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-feature-settings: "cv06", "cv11", "ss01", "ss03", "ss04";
-    background-color: ${({ theme }) => theme.backgroundColour};
-    color: ${({ theme }) => theme.textColour};
+    background-color: light-dark(var(--light-colour), var(--dark-colour));
+    color: light-dark(var(--dark-colour), var(--light-colour));
+
+    &:has([data-loading="true"]) {
+        cursor: progress;
+    }
 }
 
 #root {
-    --gap: 1rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: [full-width-start] 1fr [wrapper-start] min(1250px, 100% - 2 * var(--gap)) [wrapper-end] 1fr [full-width-end];
@@ -58,11 +71,7 @@ footer {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: full-width;
-    background-color: ${({ theme }) => theme.accentColour};
-
-    /* @media print {
-        display: none;
-    } */
+    background-color: light-dark(var(--light-colour-accent), var(--dark-colour-accent));
 }
 
 .wrapper {
@@ -71,19 +80,24 @@ footer {
 
 .border {
     --border-inline-size: calc(1.5rem / 16);
-    border: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
+    border: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem ${({ theme }) => theme.accentColour};
+    box-shadow: 0 0 0.5rem light-dark(var(--light-colour-accent), var(--dark-colour-accent));
 }
 
 img {
     max-inline-size: 100%;
     block-size: auto;
     vertical-align: middle;
+    user-select: none;
 
     &[alt] {
         font-style: italic;
         font-weight: 200;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        filter: brightness(85%);
     }
 }
 
@@ -103,8 +117,8 @@ p {
 }
 
 ::selection {
-    background-color: ${({ theme }) => theme.textColour};
-    color: ${({ theme }) => theme.backgroundColour};
+    background-color: light-dark(var(--dark-colour), var(--light-colour));
+    color: light-dark(var(--light-colour), var(--dark-colour));
 }
 `;
 

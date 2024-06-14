@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
+    /* https://css-generators.com/custom-borders */
     mask: radial-gradient(2.24rem at 50% calc(100% - 3rem), #000 99%, #0000 101%) calc(50% - 2rem) 0/4rem 100%,
-          radial-gradient(2.24rem at 50% calc(100% + 2rem), #0000 99%, #000 101%) 50% calc(100% - 1rem) / 4rem 100% repeat-x;
+        radial-gradient(2.24rem at 50% calc(100% + 2rem), #0000 99%, #000 101%) 50% calc(100% - 1rem) / 4rem 100% repeat-x;
     padding-block: 1rem 2rem;
 `;
 

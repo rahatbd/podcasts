@@ -12,8 +12,8 @@ const StyledArticle = styled.article`
     line-height: 1.5;
     padding-inline: 1rem;
 
-    > div {
-        border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
+    & > div {
+        border-block-end: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
     }
 `;
 
@@ -50,7 +50,7 @@ const StyledImageDiv = styled.div`
 `;
 
 const StyledPodcastImg = styled.img`
-    inline-size: calc(300rem / 16);
+    inline-size: calc(250rem / 16);
     aspect-ratio: 1;
 `;
 
@@ -60,6 +60,7 @@ const StyledDescriptionP = styled.p`
     -webkit-line-clamp: 4;
     overflow: hidden;
     max-inline-size: 70ch;
+    margin-inline: auto;
 `;
 
 const StyledCountryP = styled.p`
@@ -70,6 +71,7 @@ const StyledCountryP = styled.p`
 
 const StyledFlagImg = styled(Flag)`
     inline-size: 1.25lh;
+    margin-inline-start: 0.25rem;
 `;
 
 function Podcasts({ options, bestPodcasts }) {
@@ -100,8 +102,8 @@ function Podcasts({ options, bestPodcasts }) {
                         <StyledPodcastImg
                             alt={`"${title}" podcast artwork`}
                             src={thumbnail}
-                            width={300}
-                            height={300}
+                            width={250}
+                            height={250}
                             loading="lazy"
                         />
                     </StyledImageDiv>
@@ -109,7 +111,7 @@ function Podcasts({ options, bestPodcasts }) {
                         <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
                     </StyledCentreDiv>
                     <StyledCountryP>
-                        Country: {country}{' '}
+                        Country: {country}
                         <StyledFlagImg
                             alt={`${country} flag`}
                             code={findRegion(country)}

@@ -14,7 +14,7 @@ const StyledHeadingDiv = styled.div`
     align-items: center;
     flex-wrap: wrap;
     column-gap: 0.5rem;
-    border-block-end: var(--border-inline-size) solid ${({ theme }) => theme.accentColour};
+    border-block-end: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
     padding: 1rem;
 `;
 

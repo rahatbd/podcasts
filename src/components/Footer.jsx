@@ -3,8 +3,9 @@ import listenNotesWhite from '../assets/listen-notes-white.png';
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
+    /* https://css-generators.com/custom-borders */
     mask: radial-gradient(2.24rem at 50% 3rem, #000 99%, #0000 101%) calc(50% - 2rem) 0/4rem 100%,
-          radial-gradient(2.24rem at 50% -2rem, #0000 99%, #000 101%) 50% 1rem/4rem 100% repeat-x;
+        radial-gradient(2.24rem at 50% -2rem, #0000 99%, #000 101%) 50% 1rem/4rem 100% repeat-x;
     padding-block: 2rem 1rem;
 `;
 
@@ -25,7 +26,7 @@ const StyledLi = styled.li`
 `;
 
 const StyledLinksA = styled.a`
-    --visited-colour: color-mix(in oklab, currentColor, ${({ theme }) => theme.visitedColour});
+    --visited-colour: color-mix(in oklab, currentColor, light-dark(var(--light-colour-visited), var(--dark-colour-visited)));
     position: relative;
     text-decoration-line: none;
     white-space: nowrap;
@@ -39,7 +40,7 @@ const StyledLinksA = styled.a`
         display: block;
         inline-size: 100%;
         block-size: calc(1rem / 16);
-        background-color: ${({ theme }) => theme.textColour};
+        background-color: light-dark(var(--dark-colour), var(--light-colour));
         transition: transform 1.25s cubic-bezier(0.19, 1, 0.22, 1);
 
         @media (prefers-reduced-motion: reduce) {
@@ -80,6 +81,7 @@ const StyledLinksA = styled.a`
     }
 
     &:focus-visible,
+    &:active,
     ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
     ${StyledLi}:has(+ ${StyledLi} &:where(:hover, :focus-visible)) & {
         &::before,
@@ -88,8 +90,13 @@ const StyledLinksA = styled.a`
         }
     }
 
+    ${StyledLi}:has(&:where(:hover, :focus-visible)) + ${StyledLi} &,
+    ${StyledLi}:has(+ ${StyledLi} &:where(:hover, :focus-visible)) & {
+        filter: blur(calc(1rem / 16));
+    }
+
     &:active {
-        font-style: italic;
+        opacity: 0.8;
     }
 `;
 

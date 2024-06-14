@@ -6,14 +6,6 @@
     src: url("fonts/InterVariable-v4.woff2") format(woff2) tech(variations);
 }
 
-@font-face {
-    font-family: Inter;
-    font-display: swap;
-    font-style: italic;
-    font-weight: 100 900;
-    src: url("fonts/InterVariableItalic-v4.woff2") format(woff2) tech(variations);
-}
-
 *,
 ::before,
 ::after {
@@ -23,9 +15,11 @@
 html {
     --dark-colour: oklch(16.84% 0 0);
     --dark-colour-accent: oklch(22.84% 0.038 282.93);
+    --dark-colour-visited: oklch(59.99% 0 0);
     --light-colour: oklch(98.95% 0.009 78.28);
     --light-colour-accent: oklch(95.56% 0.016 73.68);
-    --visited-colour: color-mix(in oklab, currentColor, light-dark(oklch(64.01% 0.155 294.18), oklch(59.99% 0 0)));
+    --light-colour-visited: oklch(64.01% 0.155 294.18);
+    --visited-colour: color-mix(in oklab, currentColor, light-dark(var(--light-colour-visited), var(--dark-colour-visited)));
 }
 
 body {
@@ -114,7 +108,10 @@ a {
         outline: calc(2rem / 16) solid;
         outline-offset: 0.25rem;
         border-radius: 0.25rem;
+    }
 
+    &:focus-visible,
+    &:active {
         &::before,
         &::after {
             content: none;
@@ -122,7 +119,7 @@ a {
     }
 
     &:active {
-        font-style: italic;
+        opacity: 0.8;
     }
 }
 
