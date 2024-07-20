@@ -104,18 +104,18 @@ a {
         }
     }
 
-    &:focus-visible {
-        outline: calc(2rem / 16) solid;
-        outline-offset: 0.25rem;
-        border-radius: 0.25rem;
-    }
-
     &:focus-visible,
     &:active {
         &::before,
         &::after {
             content: none;
         }
+    }
+
+    &:focus-visible {
+        outline: calc(2rem / 16) solid;
+        outline-offset: 0.25rem;
+        border-radius: 0.25rem;
     }
 
     &:active {

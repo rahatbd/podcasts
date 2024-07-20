@@ -8,21 +8,16 @@ const StyledPodcastsDiv = styled.div`
 `;
 
 const StyledArticle = styled.article`
-    contain: content;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    place-items: center;
     line-height: 1.5;
-    padding-inline: 1rem;
-
-    & > div {
-        border-block-end: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
-    }
+    break-inside: avoid;
+    padding: 1rem;
 `;
 
-const StyledCentreDiv = styled.div`
-    align-content: center;
-    min-block-size: calc(125rem / 16);
-`;
-
-const StyledHeadingsDiv = styled(StyledCentreDiv)`
+const StyledHeadingsDiv = styled.div`
     text-align: center;
     text-wrap: balance;
 `;
@@ -44,33 +39,35 @@ const StyledSpan = styled.span`
     font-variation-settings: 'opsz' 32;
 `;
 
-const StyledImageDiv = styled.div`
-    display: flex;
-    justify-content: center;
-`;
-
 const StyledPodcastImg = styled.img`
     inline-size: calc(250rem / 16);
     aspect-ratio: 1;
 `;
 
 const StyledDescriptionP = styled.p`
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    overflow: hidden;
     max-inline-size: 70ch;
-    margin-inline: auto;
+    overflow-wrap: anywhere;
+
+    @media screen {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+    }
 `;
 
 const StyledCountryP = styled.p`
-    font-weight: 300;
+    justify-self: stretch;
     text-align: center;
-    padding-block: 0.5em;
+    font-weight: 300;
+    border-block-start: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
+    padding-block-start: 0.5rem;
+    margin-block-start: -0.5rem;
 `;
 
 const StyledFlagImg = styled(Flag)`
-    inline-size: 1.25lh;
+    inline-size: 2rem;
+    aspect-ratio: 2;
     margin-inline-start: 0.25rem;
 `;
 
@@ -98,24 +95,21 @@ function Podcasts({ options, bestPodcasts }) {
                             <StyledSpan>by</StyledSpan> {publisher}
                         </StyledH3>
                     </StyledHeadingsDiv>
-                    <StyledImageDiv>
-                        <StyledPodcastImg
-                            alt={`"${title}" podcast artwork`}
-                            src={thumbnail}
-                            width={250}
-                            height={250}
-                            loading="lazy"
-                        />
-                    </StyledImageDiv>
-                    <StyledCentreDiv>
-                        <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
-                    </StyledCentreDiv>
+                    <StyledPodcastImg
+                        alt={`"${title}" podcast artwork`}
+                        src={thumbnail}
+                        width={250}
+                        height={250}
+                        loading="lazy"
+                    />
+                    <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
                     <StyledCountryP>
                         Country: {country}
                         <StyledFlagImg
                             alt={`${country} flag`}
                             code={findRegion(country)}
-                            width={30}
+                            width={32}
+                            height={16}
                             loading="lazy"
                         />
                     </StyledCountryP>

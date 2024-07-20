@@ -36,8 +36,8 @@ const StyledForm = styled.form`
 `;
 
 const StyledLabel = styled.label`
-    font-size: 1.5rem;
-    font-weight: 550;
+    font-size: 1.3rem;
+    font-weight: 500;
     text-shadow: 0 0 calc(1rem / 16);
 `;
 
@@ -79,9 +79,10 @@ const StyledSelect = styled.select`
     border: none;
     border-radius: 0.5rem;
     font: inherit;
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-size: 1.15rem;
+    font-weight: 700;
     inline-size: max(250px, 100%);
+    text-overflow: ellipsis;
     cursor: pointer;
     padding-block: 0.5rem;
     padding-inline: 1rem 4rem;
@@ -93,7 +94,7 @@ const StyledSelect = styled.select`
 `;
 
 const StyledSmall = styled.small`
-    font-weight: 250;
+    font-weight: 300;
     font-variation-settings: 'opsz' 25;
 `;
 

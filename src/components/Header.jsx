@@ -10,15 +10,12 @@ const StyledHeader = styled.header`
 const StyledH1 = styled.h1`
     --text-shadow: 0 0 calc(2rem / 16);
     font-family: Decovar, Inter, ui-sans-serif, system-ui, sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 1.8rem + 1vi, 3rem);
     font-weight: 500;
     letter-spacing: calc(2rem / 16);
     text-align: center;
     text-shadow: var(--text-shadow);
     text-transform: uppercase;
-    /* https://caniuse.com/mdn-css_properties_overflow-inline */
-    overflow-x: auto;
-    overflow-inline: auto;
 
     @media (prefers-reduced-motion: no-preference) {
         animation: worm 8s linear infinite alternate;

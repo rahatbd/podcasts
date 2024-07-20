@@ -26,7 +26,6 @@ const StyledLi = styled.li`
 `;
 
 const StyledLinksA = styled.a`
-    --visited-colour: color-mix(in oklab, currentColor, light-dark(var(--light-colour-visited), var(--dark-colour-visited)));
     position: relative;
     text-decoration-line: none;
     white-space: nowrap;

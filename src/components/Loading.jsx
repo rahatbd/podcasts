@@ -7,7 +7,6 @@ function Loading({ size }) {
     return (
         <CircleLoader
             aria-label="loading"
-            data-loading="true"
             color="currentColor"
             size={size}
             speedMultiplier={prefersReducedMotion ? 0.25 : 1}

@@ -15,6 +15,10 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 /*                                                        BASE STYLES                                                         */
 /*----------------------------------------------------------------------------------------------------------------------------*/
 
+@page {
+    size: letter portrait;
+}
+
 @font-face {
     font-family: Decovar;
     font-display: swap;
@@ -44,7 +48,9 @@ html {
     --light-colour: oklch(98.95% 0.009 78.28);
     --light-colour-accent: oklch(95.56% 0.016 73.68);
     --light-colour-visited: oklch(64.01% 0.155 294.18);
+    --visited-colour: color-mix(in oklab, currentColor, light-dark(var(--light-colour-visited), var(--dark-colour-visited)));
     --gap: 1rem;
+    scrollbar-color: var(--visited-colour) light-dark(var(--light-colour-accent), var(--dark-colour-accent));
 }
 
 body {
@@ -53,7 +59,7 @@ body {
     background-color: light-dark(var(--light-colour), var(--dark-colour));
     color: light-dark(var(--dark-colour), var(--light-colour));
 
-    &:has([data-loading="true"]) {
+    &:has([aria-label="loading"]) {
         cursor: progress;
     }
 }
