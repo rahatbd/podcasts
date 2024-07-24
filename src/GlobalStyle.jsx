@@ -48,9 +48,9 @@ html {
     --light-colour: oklch(98.95% 0.009 78.28);
     --light-colour-accent: oklch(95.56% 0.016 73.68);
     --light-colour-visited: oklch(64.01% 0.155 294.18);
-    --visited-colour: color-mix(in oklab, currentColor, light-dark(var(--light-colour-visited), var(--dark-colour-visited)));
+    --visited-colour: color-mix(in oklab, currentColor, light-dark(var(--light-colour-visited), var(--dark-colour-visited)) 55%);
     --gap: 1rem;
-    scrollbar-color: var(--visited-colour) light-dark(var(--light-colour-accent), var(--dark-colour-accent));
+    scrollbar-color: light-dark(oklch(from var(--dark-colour) 65% c h), oklch(from var(--light-colour) 65% c h)) light-dark(var(--light-colour-accent), var(--dark-colour-accent));
 }
 
 body {

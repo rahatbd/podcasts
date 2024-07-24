@@ -1,3 +1,7 @@
+import reactIcon from '../assets/react.svg';
+import styledComponentsIcon from '../assets/styled-components.svg';
+import viteIcon from '../assets/vite.svg';
+import netlifyIcon from '../assets/netlify.svg';
 import listenNotesBlack from '../assets/listen-notes-black.png';
 import listenNotesWhite from '../assets/listen-notes-white.png';
 import styled from 'styled-components';
@@ -105,9 +109,32 @@ const StyledSvg = styled.svg`
     margin-inline-start: 0.25rem;
 `;
 
+const StyledIconsDiv = styled(StyledCentreDiv)`
+    margin-block: 0.5rem;
+`;
+
+const StyledIconImg = styled.img`
+    aspect-ratio: 1;
+`;
+
+const StyledReactImg = styled(StyledIconImg)`
+    inline-size: 1.5rem;
+`;
+
+const StyledComponentsImg = styled(StyledIconImg)`
+    inline-size: 3rem;
+`;
+
+const StyledViteImg = styled(StyledIconImg)`
+    inline-size: 1.5rem;
+`;
+
+const StyledNetlifyImg = styled(StyledIconImg)`
+    inline-size: 2rem;
+`;
+
 const StyledListenNotesDiv = styled.div`
     text-align: center;
-    margin-block-start: 1rem;
 `;
 
 const StyledListenNotesA = styled.a`
@@ -165,6 +192,40 @@ function Footer() {
                         </StyledLi>
                     </StyledCentreDiv>
                 </StyledCentreDiv>
+                <StyledIconsDiv>
+                    <StyledReactImg
+                        alt="React icon"
+                        src={reactIcon}
+                        title="React"
+                        width={24}
+                        height={24}
+                        loading="lazy"
+                    />
+                    <StyledComponentsImg
+                        alt="styled-components icon"
+                        src={styledComponentsIcon}
+                        title="styled-components"
+                        width={48}
+                        height={48}
+                        loading="lazy"
+                    />
+                    <StyledViteImg
+                        alt="Vite icon"
+                        src={viteIcon}
+                        title="Vite"
+                        width={24}
+                        height={24}
+                        loading="lazy"
+                    />
+                    <StyledNetlifyImg
+                        alt="Netlify icon"
+                        src={netlifyIcon}
+                        title="Netlify"
+                        width={32}
+                        height={32}
+                        loading="lazy"
+                    />
+                </StyledIconsDiv>
                 <StyledListenNotesDiv>
                     <StyledListenNotesA
                         aria-label="Listen Notes API"
@@ -181,6 +242,7 @@ function Footer() {
                                 alt="powered by LISTEN NOTES"
                                 src={listenNotesWhite}
                                 width={250}
+                                height={25}
                                 loading="lazy"
                             />
                         </picture>
