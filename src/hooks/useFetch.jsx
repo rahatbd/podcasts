@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 // const urlProxy = 'https://proxy.junocollege.com';
 // const urlBase = 'https://listen-api.listennotes.com/api/v2';
-const urlTest = 'https://listen-api-test.listennotes.com/api/v2';
+// const urlTest = 'https://listen-api-test.listennotes.com/api/v2';
 
 function useFetch(param) {
     const [data, setData] = useState(null);
@@ -16,18 +16,24 @@ function useFetch(param) {
         (async () => {
             try {
                 setIsLoading(true);
-                const response = await fetch(
-                    // `${urlBase}/${param}`,
-                    // {
-                    //     headers: {
-                    //         'X-ListenAPI-Key': import.meta.env.VITE_API_KEY,
-                    //     },
-                    //     signal,
-                    // }
-                    `${urlTest}/${param}`,
-                    { signal }
-                );
-                if (!response.ok) throw Error(`Status: ${response.status} ${response.statusText}`);
+                // const response = await fetch(
+                //     // `${urlBase}/${param}`,
+                //     // {
+                //     //     headers: {
+                //     //         'X-ListenAPI-Key': import.meta.env.VITE_API_KEY,
+                //     //     },
+                //     //     signal,
+                //     // }
+                //     `${urlTest}/${param}`,
+                //     { signal }
+                // );
+                const response = await fetch(`.netlify/functions/fetch?param=${param}`, { signal });
+                if (!response.ok) throw Error(`Status: ${response.status} - ${response.statusText}.`);
+                // if (!response.ok) {
+                //     const responseBody = await response.text();
+                //     console.log(responseBody);
+                //     throw Error(`Status: ${response.status} ${response.statusText} ${responseBody}`);
+                // }
                 const data = await response.json();
                 if (!data) throw Error('No data found!');
                 setData(data);
