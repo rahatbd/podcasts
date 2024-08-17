@@ -19,9 +19,9 @@
 import fetch from 'node-fetch';
 
 /* eslint-env node */
-const API_KEY = process.env.API_KEY;
-const URL_BASE = 'https://listen-api.listennotes.com/api/v2';
-// const URL_TEST = 'https://listen-api-test.listennotes.com/api/v2';
+// const API_KEY = process.env.API_KEY;
+// const URL_BASE = 'https://listen-api.listennotes.com/api/v2';
+const URL_TEST = 'https://listen-api-test.listennotes.com/api/v2';
 
 async function handler(event) {
     try {
@@ -33,12 +33,12 @@ async function handler(event) {
                 body: 'Missing Query Parameters.',
             };
         }
-        const response = await fetch(`${URL_BASE}/${param}`, {
-            headers: {
-                'X-ListenAPI-Key': API_KEY,
-            },
-        });
-        // const response = await fetch(`${URL_TEST}/${param}`);
+        // const response = await fetch(`${URL_BASE}/${param}`, {
+        //     headers: {
+        //         'X-ListenAPI-Key': API_KEY,
+        //     },
+        // });
+        const response = await fetch(`${URL_TEST}/${param}`);
         const { ok, status, statusText } = response;
         if (!ok) {
             console.error(`Status: ${status} - ${statusText}.`);
