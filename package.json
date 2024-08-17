@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build --base=/podcasts",
+        "build": "vite build",
         "preview": "vite preview",
         "netlify": "node_modules/.bin/netlify",
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
