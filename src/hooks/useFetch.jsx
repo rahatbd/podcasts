@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// const urlProxy = 'https://proxy.junocollege.com';
-// const urlBase = 'https://listen-api.listennotes.com/api/v2';
-// const urlTest = 'https://listen-api-test.listennotes.com/api/v2';
-
 function useFetch(param) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
@@ -16,32 +12,31 @@ function useFetch(param) {
         (async () => {
             try {
                 setIsLoading(true);
-                // const response = await fetch(
-                //     // `${urlBase}/${param}`,
-                //     // {
-                //     //     headers: {
-                //     //         'X-ListenAPI-Key': import.meta.env.VITE_API_KEY,
-                //     //     },
-                //     //     signal,
-                //     // }
-                //     `${urlTest}/${param}`,
-                //     { signal }
-                // );
-                const response = await fetch(`.netlify/functions/fetch?param=${param}`, { signal });
-                if (!response.ok) throw Error(`Status: ${response.status} - ${response.statusText}.`);
-                // if (!response.ok) {
-                //     const responseBody = await response.text();
-                //     console.log(responseBody);
-                //     throw Error(`Status: ${response.status} ${response.statusText} ${responseBody}`);
-                // }
+                const response = await fetch(
+                    //** NETLIFY **//
+                    `.netlify/functions/fetch?param=${param}`,
+                    { signal }
+                    //** DEVELOPMENT **//
+                    // `https://listen-api-test.listennotes.com/api/v2/${param}`,
+                    // { signal }
+                    //** PRODUCTION **//
+                    // `https://listen-api.listennotes.com/api/v2/${param}`,
+                    // {
+                    //     headers: {
+                    //         'X-ListenAPI-Key': import.meta.env.VITE_API_KEY,
+                    //     },
+                    //     signal,
+                    // }
+                );
+                const { ok, status, statusText } = response;
+                if (!ok) throw Error(`Status: ${status} ${statusText}`);
                 const data = await response.json();
-                if (!data) throw Error('No data found!');
                 setData(data);
                 setError(null);
             } catch (error) {
                 if (!signal.aborted) {
                     console.error(error);
-                    setError(error.message || 'An unexpected error occurred while fetching data.');
+                    setError(error.message);
                 }
             } finally {
                 setIsLoading(false);

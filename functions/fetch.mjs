@@ -1,47 +1,47 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
-// const handler = async event => {
-//     try {
-//         const subject = event.queryStringParameters.name || 'World';
-//         return {
-//             statusCode: 200,
-//             body: JSON.stringify({ message: `Hello ${subject}` }),
-//             // // more keys you can return:
-//             // headers: { "headerName": "headerValue", ... },
-//             // isBase64Encoded: true,
-//         };
-//     } catch (error) {
-//         return { statusCode: 500, body: error.toString() };
-//     }
-// };
+/*
+#-----------------------------#
+# NETLIFY SERVERLESS FUNCTION #
+#-----------------------------#
 
-// module.exports = { handler };
+# https://www.youtube.com/watch?v=m2Dr4L_Ab14
+
+# Install netlify-cli
+# npm install netlify-cli --save-dev
+
+# Install node-fetch
+# npm install node-fetch --save-dev
+
+# Add to scripts on package.json
+# "netlify": "node_modules/.bin/netlify"
+
+# Add netlify.toml file on root
+
+# Add functions folder on root
+# Add fetch.mjs file inside functions folder
+
+# Run netlify dev server
+# npm run netlify dev
+*/
 
 import fetch from 'node-fetch';
-
-/* eslint-env node */
-const API_KEY = process.env.API_KEY;
-const URL_BASE = 'https://listen-api.listennotes.com/api/v2';
-// const URL_TEST = 'https://listen-api-test.listennotes.com/api/v2';
 
 async function handler(event) {
     try {
         const { param } = event.queryStringParameters;
-        if (!param) {
-            console.error('Status: 400 - Missing Query Parameters.');
-            return {
-                statusCode: 400,
-                body: 'Missing Query Parameters.',
-            };
-        }
-        const response = await fetch(`${URL_BASE}/${param}`, {
-            headers: {
-                'X-ListenAPI-Key': API_KEY,
-            },
-        });
-        // const response = await fetch(`${URL_TEST}/${param}`);
+        const response = await fetch(
+            //** DEVELOPMENT **//
+            // `https://listen-api-test.listennotes.com/api/v2/${param}`
+            //** PRODUCTION **//
+            `https://listen-api.listennotes.com/api/v2/${param}`,
+            {
+                headers: {
+                    'X-ListenAPI-Key': process.env.API_KEY,
+                },
+            }
+        );
         const { ok, status, statusText } = response;
         if (!ok) {
-            console.error(`Status: ${status} - ${statusText}.`);
+            console.error(`Status: ${status} ${statusText}`);
             return {
                 statusCode: status,
                 body: statusText,
@@ -54,9 +54,8 @@ async function handler(event) {
         };
     } catch (error) {
         console.error(error);
-        const { statusCode: status = 500 } = error;
         return {
-            statusCode: status,
+            statusCode: 500,
             body: error.toString(),
         };
     }

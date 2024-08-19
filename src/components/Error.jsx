@@ -31,7 +31,7 @@ const StyledH2 = styled.h2`
 
 const StyledMessageDiv = styled.div`
     font-size: 1.25rem;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 1.5;
     text-align: center;
     padding: 1rem 2rem;
@@ -40,10 +40,20 @@ const StyledMessageDiv = styled.div`
 const StyledErrorP = styled.p`
     font-size: 1.35rem;
     font-weight: 700;
+    text-shadow: 0 0 calc(0.5rem / 16);
     margin-block: 0.5rem;
 `;
 
 function Error({ error }) {
+    const statusCodes = [
+        { status: '400', message: 'Missing required parameters.' },
+        { status: '401', message: 'Wrong API key.' },
+        { status: '404', message: 'Endpoint, podcast or episode do not exist.' },
+        { status: '429', message: 'The API quota limit has been reached.' },
+        { status: '500', message: 'An unexpected server error occurred.' },
+    ];
+    const statusCode = statusCodes.find(({ status }) => error.includes(status));
+
     return (
         <StyledSection aria-labelledby="error-heading">
             <div className="border">
@@ -56,11 +66,7 @@ function Error({ error }) {
                 </StyledHeadingDiv>
                 <StyledMessageDiv>
                     <p>Whoops! Something didn&apos;t go as planned! 😬</p>
-                    {error.includes('400') && <StyledErrorP>Missing required parameters.</StyledErrorP>}
-                    {error.includes('401') && <StyledErrorP>Wrong API key.</StyledErrorP>}
-                    {error.includes('404') && <StyledErrorP>Endpoint, podcast or episode do not exist.</StyledErrorP>}
-                    {error.includes('429') && <StyledErrorP>The API quota limit has been reached.</StyledErrorP>}
-                    {error.includes('500') && <StyledErrorP>Internal Server Error.</StyledErrorP>}
+                    <StyledErrorP>{statusCode ? statusCode.message : 'An unhandled exception occurred.'}</StyledErrorP>
                     <p>{error.trim()}</p>
                 </StyledMessageDiv>
             </div>
