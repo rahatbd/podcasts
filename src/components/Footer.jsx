@@ -113,23 +113,19 @@ const StyledIconsDiv = styled(StyledCentreDiv)`
     margin-block: 0.5rem;
 `;
 
-const StyledIconImg = styled.img`
-    aspect-ratio: 1;
-`;
-
-const StyledReactImg = styled(StyledIconImg)`
+const StyledReactImg = styled.img`
     inline-size: 1.5rem;
 `;
 
-const StyledComponentsImg = styled(StyledIconImg)`
+const StyledComponentsImg = styled.img`
     inline-size: 3rem;
 `;
 
-const StyledViteImg = styled(StyledIconImg)`
+const StyledViteImg = styled.img`
     inline-size: 1.5rem;
 `;
 
-const StyledNetlifyImg = styled(StyledIconImg)`
+const StyledNetlifyImg = styled.img`
     inline-size: 2rem;
 `;
 
@@ -198,7 +194,6 @@ function Footer() {
                         src={reactIcon}
                         title="React"
                         width={24}
-                        height={24}
                         loading="lazy"
                     />
                     <StyledComponentsImg
@@ -206,7 +201,6 @@ function Footer() {
                         src={styledComponentsIcon}
                         title="styled-components"
                         width={48}
-                        height={48}
                         loading="lazy"
                     />
                     <StyledViteImg
@@ -214,7 +208,6 @@ function Footer() {
                         src={viteIcon}
                         title="Vite"
                         width={24}
-                        height={24}
                         loading="lazy"
                     />
                     <StyledNetlifyImg
@@ -222,7 +215,6 @@ function Footer() {
                         src={netlifyIcon}
                         title="Netlify"
                         width={32}
-                        height={32}
                         loading="lazy"
                     />
                 </StyledIconsDiv>

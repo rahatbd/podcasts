@@ -9,7 +9,7 @@ Collection: Gentlecons Interface Icons
 License: CC Attribution License
 Link: https://www.svgrepo.com/svg/521590/cross
 -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" width="1.75rem">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
     <title>Error</title>
     <path stroke="oklch(61.86% 0.24 13.67)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M16 2H8L2 8V16L8 22H16L22 16V8L16 2Z" />

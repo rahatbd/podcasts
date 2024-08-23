@@ -104,14 +104,16 @@ function Podcasts({ options, bestPodcasts }) {
                     />
                     <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
                     <StyledCountryP>
-                        Country: {country}
-                        <StyledFlagImg
-                            alt={`${country} flag`}
-                            code={findRegion(country)}
-                            width={32}
-                            height={16}
-                            loading="lazy"
-                        />
+                        Country: {country || 'not available'}
+                        {country && (
+                            <StyledFlagImg
+                                alt={`${country} flag`}
+                                code={findRegion(country)}
+                                width={32}
+                                height={16}
+                                loading="lazy"
+                            />
+                        )}
                     </StyledCountryP>
                 </StyledArticle>
             ))}

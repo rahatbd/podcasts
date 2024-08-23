@@ -24,6 +24,8 @@ const StyledPodcastsLoadingDiv = styled.div`
     display: flex;
     justify-content: center;
     inline-size: 100%;
+    opacity: ${({ $isBestPodcastsLoading }) => ($isBestPodcastsLoading ? 1 : 0)};
+    transition: opacity ${({ $duration }) => $duration / 1000}s ease-in-out;
 `;
 
 const StyledForm = styled.form`
@@ -103,6 +105,8 @@ function Main() {
     const [region, setRegion] = useLocalStorage('country', 'ca');
     const [getRegions, errorRegions] = useFetch('regions');
     const [getBestPodcasts, errorBestPodcasts, isBestPodcastsLoading] = useFetch(`best_podcasts?region=${region}`);
+    const [isLoading, setIsLoading] = useState(isBestPodcastsLoading);
+    const duration = 500;
 
     useEffect(() => {
         if (!getRegions) return;
@@ -118,6 +122,13 @@ function Main() {
         setOptions(options);
     }, [getRegions]);
 
+    useEffect(() => {
+        let timeout;
+        if (isBestPodcastsLoading) setIsLoading(true);
+        else timeout = setTimeout(() => setIsLoading(false), duration);
+        return () => clearTimeout(timeout);
+    }, [isBestPodcastsLoading]);
+
     return (
         <main className="wrapper">
             {errorRegions || errorBestPodcasts ? (
@@ -132,8 +143,11 @@ function Main() {
                     {Boolean(options.length && getBestPodcasts?.podcasts.length) && (
                         <>
                             <StyledFormDiv>
-                                {isBestPodcastsLoading && (
-                                    <StyledPodcastsLoadingDiv>
+                                {isLoading && (
+                                    <StyledPodcastsLoadingDiv
+                                        $isBestPodcastsLoading={isBestPodcastsLoading}
+                                        $duration={duration}
+                                    >
                                         <Loading size="1rem" />
                                     </StyledPodcastsLoadingDiv>
                                 )}

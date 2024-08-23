@@ -1,28 +1,3 @@
-/*
-#-----------------------------#
-# NETLIFY SERVERLESS FUNCTION #
-#-----------------------------#
-
-# https://www.youtube.com/watch?v=m2Dr4L_Ab14
-
-# Install netlify-cli
-# npm install netlify-cli --save-dev
-
-# Install node-fetch
-# npm install node-fetch --save-dev
-
-# Add to scripts on package.json
-# "netlify": "node_modules/.bin/netlify"
-
-# Add netlify.toml file on root
-
-# Add functions folder on root
-# Add fetch.mjs file inside functions folder
-
-# Run netlify dev server
-# npm run netlify dev
-*/
-
 import fetch from 'node-fetch';
 
 async function handler(event) {

@@ -51,6 +51,7 @@ function Error({ error }) {
         { status: '404', message: 'Endpoint, podcast or episode do not exist.' },
         { status: '429', message: 'The API quota limit has been reached.' },
         { status: '500', message: 'An unexpected server error occurred.' },
+        { status: 'timed out', message: 'The server took too long to respond.' },
     ];
     const statusCode = statusCodes.find(({ status }) => error.includes(status));
 
@@ -61,6 +62,7 @@ function Error({ error }) {
                     <StyledImg
                         alt="error icon"
                         src={errorIcon}
+                        width={28}
                     />
                     <StyledH2 id="error-heading">Error</StyledH2>
                 </StyledHeadingDiv>
