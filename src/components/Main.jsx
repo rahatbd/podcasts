@@ -27,12 +27,11 @@ function Main() {
                 <Error error={errorRegions || errorBestPodcasts} />
             ) : (
                 <>
-                    {Boolean(!regions.length || !getBestPodcasts?.podcasts.length) && (
+                    {!(regions.length && getBestPodcasts?.podcasts.length) ? (
                         <div className="centre">
                             <Loading size={225} />
                         </div>
-                    )}
-                    {Boolean(regions.length && getBestPodcasts?.podcasts.length) && (
+                    ) : (
                         <>
                             <Form
                                 regions={regions}
