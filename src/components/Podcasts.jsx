@@ -71,14 +71,14 @@ const StyledFlagImg = styled(Flag)`
     margin-inline-start: 0.25rem;
 `;
 
-function Podcasts({ options, bestPodcasts }) {
+function Podcasts({ regions, bestPodcasts }) {
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
     }
 
     function findRegion(country) {
-        const { region } = options.find(({ name }) => name === country);
+        const { region } = regions.find(({ name }) => name === country);
         return region;
     }
 

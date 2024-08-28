@@ -84,13 +84,6 @@ footer {
     grid-column: wrapper;
 }
 
-.border {
-    --border-inline-size: calc(1.5rem / 16);
-    border: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem light-dark(var(--light-colour-accent), var(--dark-colour-accent));
-}
-
 img {
     max-inline-size: 100%;
     block-size: auto;
@@ -120,6 +113,19 @@ a {
 
 p {
     text-wrap: pretty;
+}
+
+.border {
+    --border-inline-size: calc(1.5rem / 16);
+    border: var(--border-inline-size) solid light-dark(var(--light-colour-accent), var(--dark-colour-accent));
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem light-dark(var(--light-colour-accent), var(--dark-colour-accent));
+}
+
+.centre {
+    display: grid;
+    place-items: center;
+    block-size: 100%;
 }
 
 ::selection {

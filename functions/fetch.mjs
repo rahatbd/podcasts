@@ -4,9 +4,10 @@ async function handler(event) {
     try {
         const { param } = event.queryStringParameters;
         const response = await fetch(
-            //** DEVELOPMENT **//
+            //----- DEVELOPMENT ----//
             // `https://listen-api-test.listennotes.com/api/v2/${param}`
-            //** PRODUCTION **//
+
+            //----- PRODUCTION ----//
             `https://listen-api.listennotes.com/api/v2/${param}`,
             {
                 headers: {
