@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import useLoadingTimeout from '../hooks/useLoadingTimeout';
 import Loading from './Loading';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ const StyledPodcastsLoadingDiv = styled.div`
     justify-content: center;
     inline-size: 100%;
     opacity: ${({ $isBestPodcastsLoading }) => ($isBestPodcastsLoading ? 1 : 0)};
-    transition: opacity ${({ $duration }) => $duration / 1000}s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 `;
 
 const StyledForm = styled.form`
@@ -91,23 +91,12 @@ const StyledSmall = styled.small`
 `;
 
 function Form({ regions, region, setRegion, isBestPodcastsLoading }) {
-    const [isLoading, setIsLoading] = useState(isBestPodcastsLoading);
-    const duration = 500;
-
-    useEffect(() => {
-        let timeout;
-        if (isBestPodcastsLoading) setIsLoading(true);
-        else timeout = setTimeout(() => setIsLoading(false), duration);
-        return () => clearTimeout(timeout);
-    }, [isBestPodcastsLoading]);
+    const isLoading = useLoadingTimeout(isBestPodcastsLoading);
 
     return (
-        <StyledFormDiv>
+        <StyledFormDiv className="blur">
             {isLoading && (
-                <StyledPodcastsLoadingDiv
-                    $isBestPodcastsLoading={isBestPodcastsLoading}
-                    $duration={duration}
-                >
+                <StyledPodcastsLoadingDiv $isBestPodcastsLoading={isBestPodcastsLoading}>
                     <Loading size="1rem" />
                 </StyledPodcastsLoadingDiv>
             )}

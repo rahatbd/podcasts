@@ -148,7 +148,7 @@ const StyledListenNotesImg = styled.img`
 
 function Footer() {
     return (
-        <StyledFooter>
+        <StyledFooter className="blur">
             <div className="wrapper">
                 <StyledCentreDiv>
                     <StyledP>&copy; Rahat Rahman 2024</StyledP>

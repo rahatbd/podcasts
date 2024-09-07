@@ -35,7 +35,7 @@ const StyledH1 = styled.h1`
 
 function Header() {
     return (
-        <StyledHeader>
+        <StyledHeader className="blur">
             <div className="wrapper">
                 <StyledH1>Podcasts</StyledH1>
             </div>

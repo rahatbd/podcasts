@@ -66,7 +66,7 @@ function Error({ error }) {
     return (
         <section
             aria-labelledby="error-heading"
-            className="centre"
+            className="blur centre"
         >
             <div className="border">
                 <StyledHeadingDiv>

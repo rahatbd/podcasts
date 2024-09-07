@@ -122,6 +122,15 @@ p {
     box-shadow: 0 0 0.5rem light-dark(var(--light-colour-accent), var(--dark-colour-accent));
 }
 
+.blur {
+    filter: revert;
+    transition: filter 0.5s ease-in;
+
+    @starting-style {
+        filter: blur(2px);
+    }
+}
+
 .centre {
     display: grid;
     place-items: center;

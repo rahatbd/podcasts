@@ -15,15 +15,15 @@ function useFetch(param) {
                 setIsLoading(true);
                 const response = await Promise.race([
                     fetch(
-                        //----- NETLIFY ----//
+                        //----- NETLIFY -----//
                         `.netlify/functions/fetch?param=${param}`,
                         { signal }
 
-                        //----- DEVELOPMENT ----//
+                        //----- DEVELOPMENT -----//
                         // `https://listen-api-test.listennotes.com/api/v2/${param}`,
                         // { signal }
 
-                        //----- PRODUCTION ----//
+                        //----- PRODUCTION -----//
                         // `https://listen-api.listennotes.com/api/v2/${param}`,
                         // {
                         //     headers: {

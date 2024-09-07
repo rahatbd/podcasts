@@ -77,16 +77,16 @@ function Podcasts({ regions, bestPodcasts }) {
         return string.body.textContent || '';
     }
 
-    function findRegion(country) {
-        const { region } = regions.find(({ name }) => name === country);
-        return region;
+    function findCode(country) {
+        const findRegion = regions.find(({ name }) => name === country);
+        return findRegion?.region;
     }
 
     return (
         <StyledPodcastsDiv>
             {bestPodcasts.podcasts.map(({ id, title, publisher, thumbnail, description, country }) => (
                 <StyledArticle
-                    className="border"
+                    className="border blur"
                     key={id}
                 >
                     <StyledHeadingsDiv>
@@ -108,7 +108,7 @@ function Podcasts({ regions, bestPodcasts }) {
                         {country && (
                             <StyledFlagImg
                                 alt={`${country} flag`}
-                                code={findRegion(country)}
+                                code={findCode(country)}
                                 width={32}
                                 height={16}
                                 loading="lazy"
