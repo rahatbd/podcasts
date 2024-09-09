@@ -1,3 +1,4 @@
+import { errorCodes } from '../constants';
 import styled from 'styled-components';
 
 const StyledHeadingDiv = styled.div`
@@ -53,15 +54,7 @@ const StyledErrorP = styled.p`
 `;
 
 function Error({ error }) {
-    const statusCodes = [
-        { status: '400', message: 'Missing required parameters.' },
-        { status: '401', message: 'Wrong API key.' },
-        { status: '404', message: 'Endpoint, podcast or episode do not exist.' },
-        { status: '429', message: 'The API quota limit has been reached.' },
-        { status: '500', message: 'An unexpected server error occurred.' },
-        { status: 'timed out', message: 'The server took too long to respond.' },
-    ];
-    const statusCode = statusCodes.find(({ status }) => error.includes(status));
+    const errorCode = errorCodes.find(({ status }) => error.includes(status));
 
     return (
         <section
@@ -105,7 +98,7 @@ function Error({ error }) {
                 </StyledHeadingDiv>
                 <StyledMessageDiv>
                     <p>Whoops! Something didn&apos;t go as planned! 😬</p>
-                    <StyledErrorP>{statusCode ? statusCode.message : 'An unhandled exception occurred.'}</StyledErrorP>
+                    <StyledErrorP>{errorCode?.message || 'An unhandled exception occurred.'}</StyledErrorP>
                     <p>{error.trim()}</p>
                 </StyledMessageDiv>
             </div>

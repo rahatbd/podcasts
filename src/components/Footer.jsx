@@ -154,7 +154,7 @@ function Footer() {
                     <StyledP>&copy; Rahat Rahman 2024</StyledP>
                     <StyledCentreDiv as="ul">
                         <StyledLi>
-                            <StyledLinksA href="/">Portfolio</StyledLinksA>
+                            <StyledLinksA href="https://rahatrahman.com">Portfolio</StyledLinksA>
                         </StyledLi>
                         <StyledLi>
                             <StyledLinksA

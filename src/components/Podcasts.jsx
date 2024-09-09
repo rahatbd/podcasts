@@ -1,3 +1,4 @@
+import { countryCodes } from '../constants';
 import Flag from 'react-world-flags';
 import styled from 'styled-components';
 
@@ -71,20 +72,21 @@ const StyledFlagImg = styled(Flag)`
     margin-inline-start: 0.25rem;
 `;
 
-function Podcasts({ regions, bestPodcasts }) {
+function Podcasts({ getBestPodcasts: { podcasts } }) {
     function stripHtml(htmlString) {
         const string = new DOMParser().parseFromString(htmlString, 'text/html');
         return string.body.textContent || '';
     }
 
     function findCode(country) {
-        const findRegion = regions.find(({ name }) => name === country);
-        return findRegion?.region;
+        for (const [code, name] of Object.entries(countryCodes)) {
+            if (country === name) return code;
+        }
     }
 
     return (
         <StyledPodcastsDiv>
-            {bestPodcasts.podcasts.map(({ id, title, publisher, thumbnail, description, country }) => (
+            {podcasts.map(({ id, title, publisher, thumbnail, description, country }) => (
                 <StyledArticle
                     className="border blur"
                     key={id}

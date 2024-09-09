@@ -9,7 +9,7 @@ import Podcasts from './Podcasts';
 import styled from 'styled-components';
 
 const StyledLoadingDiv = styled.div`
-    opacity: ${({ $isLoading }) => ($isLoading ? 1 : 0.5)};
+    opacity: ${({ $isLoading }) => ($isLoading ? 1 : 0.25)};
     transition: opacity 0.5s ease-out;
 `;
 
@@ -50,10 +50,7 @@ function Main() {
                         setRegion={setRegion}
                         isBestPodcastsLoading={isBestPodcastsLoading}
                     />
-                    <Podcasts
-                        regions={regions}
-                        bestPodcasts={getBestPodcasts}
-                    />
+                    <Podcasts getBestPodcasts={getBestPodcasts} />
                 </>
             )}
         </main>
