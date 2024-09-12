@@ -1,4 +1,5 @@
 import { errorCodes } from '../constants';
+import sadEmoji from '../assets/sad-emoji.svg';
 import styled from 'styled-components';
 
 const StyledHeadingDiv = styled.div`
@@ -44,6 +45,11 @@ const StyledMessageDiv = styled.div`
     line-height: 1.5;
     text-align: center;
     padding: 1rem 2rem;
+`;
+
+const StyledImg = styled.img`
+    transform: translateY(calc(-1rem / 16));
+    margin-inline-start: 0.25rem;
 `;
 
 const StyledErrorP = styled.p`
@@ -97,7 +103,14 @@ function Error({ error }) {
                     <StyledH2 id="error-heading">Error</StyledH2>
                 </StyledHeadingDiv>
                 <StyledMessageDiv>
-                    <p>Whoops! Something didn&apos;t go as planned! 😬</p>
+                    <p>
+                        Whoops! Something didn&apos;t go as planned!
+                        <StyledImg
+                            alt="sad emoji"
+                            src={sadEmoji}
+                            width={24}
+                        />
+                    </p>
                     <StyledErrorP>{errorCode?.message || 'An unhandled exception occurred.'}</StyledErrorP>
                     <p>{error.trim()}</p>
                 </StyledMessageDiv>
