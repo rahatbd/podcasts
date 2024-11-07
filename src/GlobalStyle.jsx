@@ -88,6 +88,7 @@ img {
     max-inline-size: 100%;
     block-size: auto;
     vertical-align: middle;
+    -webkit-user-select: none;
     user-select: none;
 
     &[alt] {
@@ -102,7 +103,6 @@ img {
 
 a {
     color: inherit;
-    user-select: none;
 
     &:focus-visible {
         outline: calc(1rem / 16) solid;

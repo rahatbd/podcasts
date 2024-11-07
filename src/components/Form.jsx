@@ -73,7 +73,7 @@ const StyledSelect = styled.select`
     font: inherit;
     font-size: 1.15rem;
     font-weight: 700;
-    inline-size: max(250px, 100%);
+    inline-size: max(190px, 100%);
     text-overflow: ellipsis;
     cursor: pointer;
     padding-block: 0.5rem;
@@ -81,6 +81,7 @@ const StyledSelect = styled.select`
 
     &:focus {
         outline: calc(1rem / 16) solid;
+        outline-offset: 0; //safari fix
         filter: drop-shadow(0 0 calc(1rem / 16));
     }
 `;

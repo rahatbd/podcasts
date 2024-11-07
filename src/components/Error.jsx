@@ -1,5 +1,4 @@
 import { errorCodes } from '../constants';
-import sadEmoji from '../assets/sad-emoji.svg';
 import styled from 'styled-components';
 
 const StyledHeadingDiv = styled.div`
@@ -13,7 +12,7 @@ const StyledHeadingDiv = styled.div`
     padding: 1rem;
 `;
 
-const StyledSvg = styled.svg`
+const StyledErrorSvg = styled.svg`
     inline-size: var(--inline-size);
 
     @media (prefers-reduced-motion: no-preference) {
@@ -47,8 +46,9 @@ const StyledMessageDiv = styled.div`
     padding: 1rem 2rem;
 `;
 
-const StyledImg = styled.img`
-    transform: translateY(calc(-1rem / 16));
+const StyledSadEmojiSvg = styled.svg`
+    inline-size: 1.5rem;
+    transform: translateY(0.25rem);
     margin-inline-start: 0.25rem;
 `;
 
@@ -80,12 +80,12 @@ function Error({ error }) {
                     License: CC Attribution License
                     Link: https://www.svgrepo.com/svg/521590/cross
                     */}
-                    <StyledSvg
+                    <StyledErrorSvg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                         fill="none"
-                        width="1.75rem"
+                        width="28"
                     >
                         <title>Error</title>
                         <path
@@ -99,17 +99,59 @@ function Error({ error }) {
                             fill="currentColor"
                             d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
                         />
-                    </StyledSvg>
+                    </StyledErrorSvg>
                     <StyledH2 id="error-heading">Error</StyledH2>
                 </StyledHeadingDiv>
                 <StyledMessageDiv>
                     <p>
                         Whoops! Something didn&apos;t go as planned!
-                        <StyledImg
-                            alt="sad emoji"
-                            src={sadEmoji}
-                            width={24}
-                        />
+                        {/* https://www.fffuel.co/lllook */}
+                        <StyledSadEmojiSvg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 48 48"
+                            aria-hidden="true"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="3"
+                            width="24"
+                        >
+                            <title>Sad emoji</title>
+                            <circle
+                                cx="24"
+                                cy="24"
+                                r="19"
+                            />
+                            <circle
+                                cx="17"
+                                cy="29"
+                                r="4"
+                            />
+                            <circle
+                                cx="32"
+                                cy="29"
+                                r="4"
+                            />
+                            <circle
+                                cx="17"
+                                cy="29"
+                                r="1"
+                                stroke="none"
+                            />
+                            <circle
+                                cx="32"
+                                cy="29"
+                                r="1"
+                                stroke="none"
+                            />
+                            <line
+                                x1="20"
+                                y1="38"
+                                x2="28"
+                                y2="38"
+                            />
+                        </StyledSadEmojiSvg>
                     </p>
                     <StyledErrorP>{errorCode?.message || 'An unhandled exception occurred.'}</StyledErrorP>
                     <p>{error.trim()}</p>

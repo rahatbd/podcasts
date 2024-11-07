@@ -26,6 +26,7 @@ const StyledHeadingsDiv = styled.div`
 const StyledH2 = styled.h2`
     font-size: 1.1rem;
     font-weight: 800;
+    font-variation-settings: 'opsz' 32;
     letter-spacing: calc(1rem / 16);
 `;
 
@@ -100,9 +101,10 @@ function Podcasts({ getBestPodcasts: { podcasts } }) {
                     <StyledPodcastImg
                         alt={`"${title}" podcast artwork`}
                         src={thumbnail}
-                        width={250}
-                        height={250}
+                        width="250"
+                        height="250"
                         loading="lazy"
+                        decoding="async"
                     />
                     <StyledDescriptionP>{stripHtml(description)}</StyledDescriptionP>
                     <StyledCountryP>
@@ -111,9 +113,10 @@ function Podcasts({ getBestPodcasts: { podcasts } }) {
                             <StyledFlagImg
                                 alt={`${country} flag`}
                                 code={findCode(country)}
-                                width={32}
-                                height={16}
+                                width="32"
+                                height="16"
                                 loading="lazy"
+                                decoding="async"
                             />
                         )}
                     </StyledCountryP>
