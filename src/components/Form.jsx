@@ -30,7 +30,10 @@ const StyledForm = styled.form`
 const StyledLabel = styled.label`
     font-size: 1.3rem;
     font-weight: 500;
-    text-shadow: 0 0 calc(1rem / 16);
+
+    @media screen {
+        text-shadow: 0 0 calc(1rem / 16);
+    }
 `;
 
 const StyledArrowDiv = styled.div`
@@ -42,7 +45,7 @@ const StyledArrowDiv = styled.div`
         content: '\\00a0';
         position: absolute;
         inset-inline-end: 15%;
-        border-inline-start: calc(1rem / 16) solid GrayText;
+        border-inline-start: calc(1rem / 16) solid ${({ $isBestPodcastsLoading }) => $isBestPodcastsLoading && 'GrayText'};
         z-index: 1;
         pointer-events: none;
     }
@@ -53,26 +56,23 @@ const StyledArrowDiv = styled.div`
         content: '';
         position: absolute;
         inset-inline-end: 5%;
-        border-block-start: var(--border-inline-size) solid;
+        border-block-start: var(--border-inline-size) solid ${({ $isBestPodcastsLoading }) => $isBestPodcastsLoading && 'GrayText'};
         border-inline: var(--border-inline-size) solid transparent;
         border-start-start-radius: var(--border-radius);
         border-start-end-radius: var(--border-radius);
         pointer-events: none;
     }
-
-    &:has(select:disabled)::after {
-        border-block-start-color: GrayText;
-    }
 `;
 
 const StyledSelect = styled.select`
     appearance: none;
+    color: currentColor;
     background-color: light-dark(var(--light-colour-accent), var(--dark-colour-accent));
     border: none;
     border-radius: 0.5rem;
-    font: inherit;
     font-size: 1.15rem;
     font-weight: 700;
+    font-feature-settings: inherit;
     inline-size: max(190px, 100%);
     text-overflow: ellipsis;
     cursor: pointer;
@@ -81,8 +81,12 @@ const StyledSelect = styled.select`
 
     &:focus {
         outline: calc(1rem / 16) solid;
-        outline-offset: 0; //safari fix
+        outline-offset: 0; /* safari fix */
         filter: drop-shadow(0 0 calc(1rem / 16));
+    }
+
+    &:disabled {
+        color: GrayText;
     }
 `;
 
@@ -103,7 +107,7 @@ function Form({ regions, region, setRegion, isBestPodcastsLoading }) {
             )}
             <StyledForm>
                 <StyledLabel htmlFor="region">Best Podcasts</StyledLabel>
-                <StyledArrowDiv>
+                <StyledArrowDiv $isBestPodcastsLoading={isBestPodcastsLoading}>
                     <StyledSelect
                         autoComplete="on"
                         id="region"

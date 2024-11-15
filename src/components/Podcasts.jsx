@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledPodcastsDiv = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(425px, 100%), 1fr));
     gap: var(--gap);
 `;
 
@@ -68,8 +68,7 @@ const StyledCountryP = styled.p`
 `;
 
 const StyledFlagImg = styled(Flag)`
-    inline-size: 2rem;
-    aspect-ratio: 2;
+    inline-size: 1.25lh;
     margin-inline-start: 0.25rem;
 `;
 
@@ -113,8 +112,7 @@ function Podcasts({ getBestPodcasts: { podcasts } }) {
                             <StyledFlagImg
                                 alt={`${country} flag`}
                                 code={findCode(country)}
-                                width="32"
-                                height="16"
+                                width="30"
                                 loading="lazy"
                                 decoding="async"
                             />

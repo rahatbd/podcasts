@@ -78,6 +78,7 @@ footer {
     grid-template-columns: subgrid;
     grid-column: full-width;
     background-color: light-dark(var(--light-colour-accent), var(--dark-colour-accent));
+    padding-block: 1rem;
 }
 
 .wrapper {
@@ -88,8 +89,6 @@ img {
     max-inline-size: 100%;
     block-size: auto;
     vertical-align: middle;
-    -webkit-user-select: none;
-    user-select: none;
 
     &[alt] {
         font-style: italic;
