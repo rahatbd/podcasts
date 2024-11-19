@@ -66,7 +66,7 @@ const StyledArrowDiv = styled.div`
 
 const StyledSelect = styled.select`
     appearance: none;
-    color: currentColor;
+    color: inherit;
     background-color: light-dark(var(--light-colour-accent), var(--dark-colour-accent));
     border: none;
     border-radius: 0.5rem;
@@ -81,7 +81,7 @@ const StyledSelect = styled.select`
 
     &:focus {
         outline: calc(1rem / 16) solid;
-        outline-offset: 0; /* safari fix */
+        outline-offset: initial; /* safari fix */
         filter: drop-shadow(0 0 calc(1rem / 16));
     }
 

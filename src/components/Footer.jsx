@@ -34,6 +34,7 @@ const StyledLi = styled.li`
 
 const StyledLinksA = styled.a`
     position: relative;
+    font-weight: 600;
     text-decoration-line: none;
     white-space: nowrap;
 
@@ -111,7 +112,7 @@ const StyledNewTabSvg = styled.svg`
     margin-inline-start: 0.25rem;
 
     ${StyledLinksA}:visited & {
-        fill: currentColor;
+        fill: var(--visited-colour);
     }
 `;
 

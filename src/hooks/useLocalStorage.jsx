@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 /**
  * Custom hook to persist React state in localStorage
  * @link https://www.joshwcomeau.com/react/persisting-react-state-in-localstorage
- * @param {string}                 key          key under which the value is stored in localStorage
- * @param {*}                      defaultValue default value if the localStorage key does not exist
- * @returns {Array<any, Function>}              returns an array with the current state and a function to update it
+ * @param {string}                 key          key used to store and retrieve the value from localStorage
+ * @param {string}                 defaultValue default value if no value is found in localStorage
+ * @returns {[string, Function]}                returns an array containing the current value and a setter function that updates the value and syncs it to localStorage
  */
 function useLocalStorage(key, defaultValue) {
     const [value, setValue] = useState(() => {
@@ -13,9 +13,7 @@ function useLocalStorage(key, defaultValue) {
         return localStorageValue === null ? defaultValue : JSON.parse(localStorageValue);
     });
 
-    useEffect(() => {
-        window.localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value]);
+    useEffect(() => window.localStorage.setItem(key, JSON.stringify(value)), [key, value]);
 
     return [value, setValue];
 }

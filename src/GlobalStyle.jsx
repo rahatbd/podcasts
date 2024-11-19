@@ -30,7 +30,7 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     font-display: swap;
     font-style: normal;
     font-weight: 100 900;
-    src: url("fonts/InterVariable-v4.woff2") format(woff2) tech(variations);
+    src: url("fonts/InterVariable-v4.1.woff2") format(woff2) tech(variations);
 }
 
 @font-face {
@@ -38,7 +38,7 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     font-display: swap;
     font-style: italic;
     font-weight: 100 900;
-    src: url("fonts/InterVariableItalic-v4.woff2") format(woff2) tech(variations);
+    src: url("fonts/InterVariableItalic-v4.1.woff2") format(woff2) tech(variations);
 }
 
 html {
