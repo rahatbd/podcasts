@@ -42,7 +42,7 @@ function useFetch(param) {
             } catch (error) {
                 if (!signal.aborted) {
                     console.error(error);
-                    setError(error.message);
+                    setError(error.message.trimEnd());
                 }
             } finally {
                 setIsLoading(false);

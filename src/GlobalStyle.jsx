@@ -55,7 +55,7 @@ html {
 
 body {
     font-family: Inter, ui-sans-serif, system-ui, sans-serif, "Twemoji Mozilla", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-feature-settings: "cv06", "cv11", "ss01", "ss03", "ss04";
+    font-feature-settings:  "cv01", "cv05", "cv06", "cv11", "ss01", "ss07", "ss08";
     background-color: light-dark(var(--light-colour), var(--dark-colour));
     color: light-dark(var(--dark-colour), var(--light-colour));
 

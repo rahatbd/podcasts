@@ -154,7 +154,7 @@ function Error({ error }) {
                         </StyledSadEmojiSvg>
                     </p>
                     <StyledErrorP>{errorCode?.message || 'An unhandled exception occurred.'}</StyledErrorP>
-                    <p>{error.trim()}</p>
+                    <p>{error}</p>
                 </StyledMessageDiv>
             </div>
         </section>
